@@ -18,7 +18,7 @@ export default function InstructorCreateCourse() {
 
     try {
       const response = await createInstructorCourse(course)
-      navigate('/instructor/courses', {
+      navigate('/dashboard/instructor/courses', {
         replace: true,
         state: { notice: response.message || 'Course created successfully.' },
       })
@@ -48,7 +48,7 @@ export default function InstructorCreateCourse() {
         />
       </div>
 
-      <Link to="/instructor/courses" className="mt-6 inline-flex text-sm font-medium text-secondary hover:text-secondary">
+      <Link to="/dashboard/instructor/courses" className="mt-6 inline-flex text-sm font-medium text-secondary hover:text-secondary">
         Back to all courses
       </Link>
     </section>

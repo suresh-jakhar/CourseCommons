@@ -1,20 +1,6 @@
-import { Link, Navigate } from 'react-router-dom'
-import { useAtomValue } from 'jotai'
-import { instructorAuthAtom } from '../state/instructorAuthAtom'
-import { authAtom } from '../state/authAtom'
+import { Link } from 'react-router-dom'
 
 export default function Signup() {
-  const learnerAuth = useAtomValue(authAtom)
-  const instructorAuth = useAtomValue(instructorAuthAtom)
-
-  if (learnerAuth.isLoggedIn) {
-    return <Navigate to="/" replace />
-  }
-
-  if (instructorAuth.isLoggedIn) {
-    return <Navigate to="/instructor/courses" replace />
-  }
-
   return (
     <div className="flex min-h-full items-center justify-center px-6 py-16">
       <div className="w-full max-w-4xl space-y-10">
@@ -28,7 +14,6 @@ export default function Signup() {
             </Link>
           </p>
         </div>
-
         <div className="grid gap-6 md:grid-cols-2">
           <Link
             to="/signup/learner"
@@ -41,7 +26,6 @@ export default function Signup() {
             </p>
             <span className="mt-6 inline-flex text-sm font-semibold text-secondary">Continue as learner</span>
           </Link>
-
           <Link
             to="/signup/instructor"
             className="rounded-3xl border border-border bg-surface p-8 transition hover:border-muted hover:bg-surface"

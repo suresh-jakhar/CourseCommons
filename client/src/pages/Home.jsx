@@ -169,48 +169,46 @@ export default function Home() {
           <div className="pointer-events-none absolute left-[50%] top-0 h-full w-px bg-gradient-to-b from-transparent via-white/18 to-transparent" />
           <div className="pointer-events-none absolute left-[88%] top-0 h-full w-px bg-gradient-to-b from-transparent via-white/22 to-transparent" />
 
-          {/* Floating pill nav — compact, centered */}
-          <div className="relative z-50 px-6 pt-4 md:px-10 md:pt-6">
-            <div className="pointer-events-none absolute inset-x-0 top-[14px] mx-auto h-14 max-w-[1320px] bg-[radial-gradient(ellipse_30%_100%_at_50%_0%,rgba(227,236,245,0.23)_0%,rgba(164,178,195,0.10)_38%,transparent_80%)]" />
-            <div className="relative mx-auto flex max-w-[1320px] items-center justify-between overflow-hidden rounded-[22px] border border-border bg-[linear-gradient(180deg,rgba(24,32,44,0.82)_0%,rgba(12,18,29,0.84)_100%)] px-7 py-3 shadow-[0_8px_28px_rgba(0,0,0,0.42),inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-[14px]">
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/28 to-transparent" />
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-              <div className="flex min-w-0 items-center gap-4 md:gap-6">
-                <Link to="/" className="flex shrink-0 items-center gap-2.5">
-                  <img src={logo} alt="CourseCommons" className="h-5 w-5 opacity-95" />
-                  <span className="cinematic-title text-sm font-semibold text-white/94">CourseCommons</span>
-                </Link>
-                <nav className="hidden items-center gap-1 md:flex">
-                  <Link
-                    to="/"
-                    className="relative rounded-[14px] border border-border bg-[linear-gradient(180deg,rgba(165,177,194,0.38)_0%,rgba(110,124,144,0.35)_100%)] px-7 py-2.5 text-sm font-medium text-primary shadow-[inset_0_1px_0_rgba(255,255,255,0.30),0_8px_20px_rgba(94,109,129,0.24)]"
-                  >
-                    Home
-                    <span className="pointer-events-none absolute bottom-[-12px] left-1/2 h-px w-12 -translate-x-1/2 bg-glass0" />
-                  </Link>
-                  <Link to="/courses" className="rounded-xl px-6 py-2 text-sm font-medium text-white/82 transition-colors hover:text-primary">Courses</Link>
-                </nav>
+          {/* Redesigned Floating pill nav — compact, centered */}
+          <nav className="nav-pill">
+            {/* Brand logo */}
+            <Link to="/" className="flex items-center gap-2 px-3">
+              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-white/5 border border-white/5">
+                <img src={logo} alt="Logo" className="h-4 w-4 brightness-200" />
               </div>
-              <div className="flex items-center gap-2 md:gap-3">
-                <div className="hidden items-center rounded-[16px] border border-border bg-glass px-4 py-2.5 md:flex">
-                  <input
-                    type="text"
-                    placeholder="Type to search"
-                    className="w-60 bg-[#141414] text-sm text-white/86 outline-none placeholder:text-white/44 lg:w-64"
-                    aria-label="Search courses"
-                  />
-                </div>
-                <Link to="/signin" className="rounded-[14px] border border-border bg-glass px-7 py-2.5 text-sm font-medium text-white/93 transition-colors hover:bg-glass">Log in</Link>
-                <Link to="/signup" className="rounded-[14px] border border-border bg-surface px-7 py-2.5 text-sm font-medium text-secondary transition-colors hover:bg-surface">Create Account</Link>
-              </div>
+              <span className="hidden font-semibold text-white/90 text-[13px] tracking-tight sm:inline-block">CourseCommons</span>
+            </Link>
+
+            <div className="h-4 w-[1px] bg-white/10 mx-1" />
+
+            {/* Nav Links - Centered capsule style */}
+            <div className="flex items-center gap-0.5 ml-1">
+              <Link to="/" className="nav-link-capsule nav-link-active">
+                Home
+              </Link>
+              <Link to="/courses" className="nav-link-capsule">
+                Courses
+              </Link>
             </div>
-          </div>
+
+            {/* Search feature - Restored and styled per reference */}
+            <div className="nav-search-container">
+              <input 
+                type="text" 
+                placeholder="Type to search" 
+                className="nav-search-input"
+              />
+            </div>
+
+            {/* Auth Actions - Right side */}
+            <div className="flex items-center gap-2">
+              <Link to="/signin" className="cinematic-btn-outline">Log in</Link>
+              <Link to="/signup" className="cinematic-btn-solid">Create Account</Link>
+            </div>
+          </nav>
 
           {/* Hero content */}
-          <div className="relative z-10 mx-auto max-w-4xl px-6 pb-10 pt-14 text-center md:pt-16">
-            <p className="mb-5 inline-flex rounded-full border border-border bg-glass px-4 py-1.5 text-[11px] uppercase tracking-[0.22em] text-secondary">
-              Premium Desktop Landing
-            </p>
+          <div className="relative z-10 mx-auto max-w-4xl px-6 pb-10 pt-28 text-center md:pt-32">
             <h1 className="cinematic-title text-[3.2rem] font-black leading-[1.05] tracking-tight text-primary md:text-[5.5rem]">
               Where Knowledge
               <br />

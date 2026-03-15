@@ -39,11 +39,11 @@ export default function Signin() {
   const [isLoading, setIsLoading] = useState(false)
 
   if (instructorAuth.isLoggedIn) {
-    return <Navigate to="/instructor/courses" replace />
+    return <Navigate to="/dashboard/instructor/courses" replace />
   }
 
   if (learnerAuth.isLoggedIn) {
-    return <Navigate to="/my-courses" replace />
+    return <Navigate to="/dashboard/learner" replace />
   }
 
   function handleChange(e) {
@@ -63,7 +63,7 @@ export default function Signin() {
       localStorage.setItem('instructorToken', instructorData.token)
       localStorage.setItem('instructorEmail', form.email)
       setInstructorAuth({ token: instructorData.token, email: form.email, isLoggedIn: true })
-      navigate('/instructor/courses', { replace: true })
+      navigate('/dashboard/instructor/courses', { replace: true })
     } catch (instructorError) {
       try {
         const data = await signin(form)
@@ -71,7 +71,7 @@ export default function Signin() {
         setAuth({ token: data.token, isLoggedIn: true })
         const user = await getProfile()
         setProfile(user)
-        navigate('/my-courses', { replace: true })
+        navigate('/dashboard/learner', { replace: true })
       } catch (userError) {
         setError(getSigninErrorMessage(userError, instructorError))
       }

@@ -106,7 +106,7 @@ export default function InstructorCourseLearners() {
         </>
       )}
 
-      <Link to="/instructor/courses" className="mt-6 inline-flex text-sm font-medium text-secondary hover:text-secondary">
+      <Link to="/dashboard/instructor/courses" className="mt-6 inline-flex text-sm font-medium text-secondary hover:text-secondary">
         Back to all courses
       </Link>
     </section>

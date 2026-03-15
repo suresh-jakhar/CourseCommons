@@ -15,7 +15,7 @@ export default function ProtectedRoute({ children }) {
 
   // Logged-in instructor trying to access a learner page → send to instructor dashboard
   if (instructorAuth.isLoggedIn) {
-    return <Navigate to="/instructor/courses" replace />
+    return <Navigate to="/dashboard/instructor" replace />
   }
 
   // Not logged in at all → send to sign-in, preserving the intended destination

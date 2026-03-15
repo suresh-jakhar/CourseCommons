@@ -92,7 +92,7 @@ export default function InstructorCourses() {
         </div>
 
         <Link
-          to="/instructor/courses/new"
+          to="/dashboard/instructor/courses/new"
           className="inline-flex rounded-lg bg-btn text-primary px-4 py-2.5 text-sm font-semibold text-primary hover:bg-btn-hover"
         >
           Create course
@@ -137,7 +137,7 @@ export default function InstructorCourses() {
             Start by creating your first course. You can make it free or paid and edit it later.
           </p>
           <Link
-            to="/instructor/courses/new"
+            to="/dashboard/instructor/courses/new"
             className="mt-6 inline-flex rounded-lg bg-btn text-primary px-4 py-2.5 text-sm font-semibold text-primary hover:bg-btn-hover"
           >
             Create your first course
@@ -170,13 +170,13 @@ export default function InstructorCourses() {
 
                 <div className="flex flex-wrap gap-3">
                   <Link
-                    to={`/instructor/courses/${course._id}/learners`}
+                    to={`/dashboard/instructor/courses/${course._id}/learners`}
                     className="rounded-lg border border-emerald-500/40 px-4 py-2 text-sm font-medium text-emerald-300 hover:bg-emerald-500/10"
                   >
                     View learners
                   </Link>
                   <Link
-                    to={`/instructor/courses/${course._id}/edit`}
+                    to={`/dashboard/instructor/courses/${course._id}/edit`}
                     className="rounded-lg border border-border px-4 py-2 text-sm font-medium text-secondary hover:text-primary"
                   >
                     Edit course
