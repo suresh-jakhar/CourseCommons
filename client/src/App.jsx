@@ -12,6 +12,7 @@ import AdminSignup from './pages/AdminSignup'
 import AdminCourses from './pages/AdminCourses'
 import AdminCreateCourse from './pages/AdminCreateCourse'
 import AdminEditCourse from './pages/AdminEditCourse'
+import InstructorCourseLearners from './pages/InstructorCourseLearners'
 import AppShell from './components/AppShell'
 import AdminProtectedRoute from './components/AdminProtectedRoute'
 import ProtectedRoute from './components/ProtectedRoute'
@@ -69,6 +70,14 @@ function App() {
           element={
             <AdminProtectedRoute>
               <AdminEditCourse />
+            </AdminProtectedRoute>
+          }
+        />
+        <Route
+          path="/instructor/courses/:courseId/learners"
+          element={
+            <AdminProtectedRoute>
+              <InstructorCourseLearners />
             </AdminProtectedRoute>
           }
         />

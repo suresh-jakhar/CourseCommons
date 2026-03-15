@@ -8,7 +8,7 @@ const jwt = require("jsonwebtoken");
 const { z } = require("zod");
 
 const mongoose = require("mongoose");
-const { adminModel, courseModel } = require("../db/db");
+const { adminModel, courseModel, enrollmentModel, userModel } = require("../db/db");
 const { adminAuth } = require("../middleware/adminAuth");
 
 const ADMIN_JWT_SECRET = process.env.ADMIN_JWT_SECRET;
@@ -294,6 +294,53 @@ adminRouter.get("/course/bulk", adminAuth, async function(req, res) {
 
         res.status(500).json({
             message: "Error fetching courses"
+        });
+
+    }
+
+});
+
+adminRouter.get("/course/:courseId/learners", adminAuth, async function(req, res) {
+
+    try {
+
+        const adminId = req.adminId;
+        const courseId = req.params.courseId;
+
+        if (!mongoose.Types.ObjectId.isValid(courseId)) {
+            return res.status(400).json({
+                message: "Invalid course ID"
+            });
+        }
+
+        const course = await courseModel.findOne({
+            _id: courseId,
+            creatorId: adminId
+        }).select("title _id");
+
+        if (!course) {
+            return res.status(403).json({
+                message: "You can access learners only for your own courses"
+            });
+        }
+
+        const enrollments = await enrollmentModel.find({ courseId }).select("userId");
+        const learnerIds = enrollments.map((enrollment) => enrollment.userId);
+
+        const learners = await userModel.find({
+            _id: { $in: learnerIds }
+        }).select("firstName lastName email");
+
+        res.json({
+            course,
+            learners,
+            totalLearners: learners.length
+        });
+
+    } catch (err) {
+
+        res.status(500).json({
+            message: "Error fetching enrolled learners"
         });
 
     }
