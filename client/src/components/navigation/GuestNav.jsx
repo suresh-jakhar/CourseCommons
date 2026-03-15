@@ -5,7 +5,7 @@ export default function GuestNav() {
   const location = useLocation()
 
   return (
-    <nav className="nav-pill">
+    <nav className="nav-pill guest-nav-pill">
       {/* Brand logo */}
       <Link to="/" className="flex items-center gap-2 px-3">
         <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-white/5 border border-white/5">
@@ -21,8 +21,8 @@ export default function GuestNav() {
         <Link to="/" className={`nav-link-capsule ${location.pathname === '/' ? 'nav-link-active' : ''}`}>
           Home
         </Link>
-        <Link to="/features" className={`nav-link-capsule ${location.pathname === '/features' ? 'nav-link-active' : ''}`}>
-          Features
+        <Link to="/courses" className={`nav-link-capsule ${location.pathname === '/courses' ? 'nav-link-active' : ''}`}>
+          Courses
         </Link>
       </div>
 

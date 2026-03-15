@@ -31,11 +31,14 @@ function App() {
       {/* ─── Guest Routes ─── */}
       <Route element={<GuestLayout />}>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/signin" element={<Signin />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/signup/learner" element={<LearnerSignup />} />
-        <Route path="/signup/instructor" element={<InstructorSignup />} />
+        {/* Only wrap LandingPage with GuestLayout */}
       </Route>
+
+      {/* ─── Standalone Auth Routes ─── */}
+      <Route path="/signin" element={<Signin />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/signup/learner" element={<LearnerSignup />} />
+      <Route path="/signup/instructor" element={<InstructorSignup />} />
 
       {/* ─── Learner Routes ─── */}
       <Route path="/dashboard/learner" element={<LearnerLayout />}>

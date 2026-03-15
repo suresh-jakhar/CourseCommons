@@ -9,7 +9,7 @@ export default function LandingPage() {
       {/* Full-bleed hero with starfield */}
       <section
         className="relative min-h-screen overflow-hidden"
-        style={{ background: 'radial-gradient(ellipse 74% 48% at 50% 0%, rgba(202,216,233,0.28) 0%, rgba(108,132,157,0.08) 38%, transparent 70%), #04070d' }}
+        style={{ background: '#04070d' }}
       >
         {/* Dense starfield */}
         <div
@@ -55,32 +55,13 @@ export default function LandingPage() {
               radial-gradient(1px   1px   at 96% 60%, rgba(255,255,255,0.30) 0%,transparent 100%)`,
           }}
         />
-        {/* Overhead light cone */}
-        <div
-          className="pointer-events-none absolute inset-0 z-[2]"
-          style={{
-            background:
-              'radial-gradient(ellipse 40% 22% at 50% 0%, rgba(242,248,255,0.60) 0%, rgba(198,215,232,0.34) 34%, rgba(123,147,173,0.14) 56%, transparent 76%)',
-            mixBlendMode: 'screen',
-          }}
-        />
-        <div
-          className="pointer-events-none absolute left-1/2 top-[36px] z-[2] h-[760px] w-[1050px] -translate-x-1/2"
-          style={{
-            background:
-              'radial-gradient(ellipse 52% 74% at 50% 0%, rgba(228,238,248,0.42) 0%, rgba(170,190,211,0.22) 28%, rgba(106,130,156,0.11) 50%, rgba(69,89,112,0.05) 62%, transparent 78%)',
-            filter: 'blur(1px)',
-            mixBlendMode: 'screen',
-          }}
-        />
-        <div
-          className="pointer-events-none absolute left-1/2 bottom-[-240px] z-[2] h-[580px] w-[1240px] -translate-x-1/2"
-          style={{
-            background:
-              'radial-gradient(ellipse 46% 60% at 50% 35%, rgba(228,238,249,0.34) 0%, rgba(165,185,206,0.16) 34%, rgba(95,117,141,0.05) 56%, transparent 74%)',
-            mixBlendMode: 'screen',
-          }}
-        />
+        <div className="landing-lamp-glow">
+          <div className="landing-lamp-source" />
+          <div className="landing-lamp-beam" />
+          <div className="landing-lamp-core" />
+          <div className="landing-lamp-haze" />
+          <div className="landing-lamp-floor" />
+        </div>
         <div
           className="pointer-events-none absolute inset-0 z-[1]"
           style={{
@@ -90,16 +71,20 @@ export default function LandingPage() {
         />
 
         {/* Vertical light streaks */}
-        <div className="pointer-events-none absolute left-[11%] top-0 h-full w-px bg-gradient-to-b from-transparent via-white/25 to-transparent" />
-        <div className="pointer-events-none absolute left-[50%] top-0 h-full w-px bg-gradient-to-b from-transparent via-white/18 to-transparent" />
-        <div className="pointer-events-none absolute left-[88%] top-0 h-full w-px bg-gradient-to-b from-transparent via-white/22 to-transparent" />
+        <div className="landing-streak landing-streak-left" />
+        <div className="landing-streak landing-streak-left-secondary" />
+        <div className="landing-streak landing-streak-right" />
+        <div className="landing-streak landing-streak-right-secondary" />
 
         {/* Guest Navigation */}
         <GuestNav />
 
+        {false && (
+          <>
+
         {/* Hero content */}
-        <div className="relative z-10 mx-auto max-w-4xl px-6 pb-10 pt-28 text-center md:pt-32">
-          <h1 className="cinematic-title text-[3.2rem] font-black leading-[1.05] tracking-tight text-primary md:text-[5.5rem]">
+        <div className="landing-hero-copy relative z-10 mx-auto max-w-4xl px-6 pb-10 pt-28 text-center md:pt-32">
+          <h1 className="landing-hero-title cinematic-title text-[2.9rem] font-black leading-[1.05] tracking-tight text-primary md:text-[4.1rem]">
             Where Knowledge
             <br />
             Becomes Shared.
@@ -257,8 +242,12 @@ export default function LandingPage() {
             </div>
           </div>
         </div>
+          </>
+        )}
       </section>
 
+      {false && (
+        <>
       {/* Features section */}
       <section className="border-t border-border px-6 py-16 md:px-10 md:py-20">
         <div className="mx-auto max-w-7xl">
@@ -294,6 +283,8 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+        </>
+      )}
     </div>
   )
 }
