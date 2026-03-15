@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { deleteAdminCourse, getAdminCourses } from '../services/admin'
+import { deleteInstructorCourse, getInstructorCourses } from '../services/instructor'
 
-function getAdminCoursesErrorMessage(err) {
+function getInstructorCoursesErrorMessage(err) {
   return err.response?.data?.message || 'Unable to load your courses right now.'
 }
 
@@ -14,7 +14,7 @@ function formatPrice(course) {
   return `$${Number(course.price || 0).toFixed(2)}`
 }
 
-export default function AdminCourses() {
+export default function InstructorCourses() {
   const location = useLocation()
   const [courses, setCourses] = useState([])
   const [error, setError] = useState('')
@@ -27,20 +27,20 @@ export default function AdminCourses() {
 
     async function loadCourses() {
       try {
-        const adminCourses = await getAdminCourses()
+        const instructorCourses = await getInstructorCourses()
 
         if (!isMounted) {
           return
         }
 
-        setCourses(adminCourses)
+        setCourses(instructorCourses)
         setError('')
       } catch (err) {
         if (!isMounted) {
           return
         }
 
-        setError(getAdminCoursesErrorMessage(err))
+        setError(getInstructorCoursesErrorMessage(err))
       } finally {
         if (isMounted) {
           setIsLoading(false)
@@ -67,11 +67,11 @@ export default function AdminCourses() {
     setNotice('')
 
     try {
-      const response = await deleteAdminCourse(courseId)
+      const response = await deleteInstructorCourse(courseId)
       setCourses((prev) => prev.filter((course) => course._id !== courseId))
       setNotice(response.message || 'Course deleted successfully.')
     } catch (err) {
-      setError(getAdminCoursesErrorMessage(err))
+      setError(getInstructorCoursesErrorMessage(err))
     } finally {
       setDeletingId('')
     }
@@ -84,7 +84,7 @@ export default function AdminCourses() {
     <section className="px-6 py-8 lg:px-10">
       <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <p className="text-sm font-medium uppercase tracking-[0.2em] text-blue-400">Admin workspace</p>
+          <p className="text-sm font-medium uppercase tracking-[0.2em] text-blue-400">Instructor workspace</p>
           <h1 className="mt-2 text-4xl font-bold text-white">Manage your course catalog</h1>
           <p className="mt-3 max-w-2xl text-sm leading-6 text-gray-300">
             Create, update, and retire the courses you publish on CourseCommons.
@@ -128,7 +128,7 @@ export default function AdminCourses() {
 
       {isLoading ? (
         <div className="rounded-2xl border border-gray-800 bg-gray-900/60 p-8 text-sm text-gray-300">
-          Loading your admin courses...
+          Loading your instructor courses...
         </div>
       ) : courses.length === 0 ? (
         <div className="rounded-2xl border border-gray-800 bg-gray-900/60 p-8">

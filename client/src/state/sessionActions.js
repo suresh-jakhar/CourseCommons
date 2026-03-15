@@ -1,5 +1,5 @@
 import { appStore } from './store'
-import { adminAuthAtom } from './adminAuthAtom'
+import { instructorAuthAtom } from './instructorAuthAtom'
 import { authAtom } from './authAtom'
 import { enrolledCoursesAtom } from './enrolledCoursesAtom'
 import { profileAtom } from './profileAtom'
@@ -11,8 +11,8 @@ export function clearLearnerSession() {
   appStore.set(enrolledCoursesAtom, [])
 }
 
-export function clearAdminSession() {
-  localStorage.removeItem('adminToken')
-  localStorage.removeItem('adminEmail')
-  appStore.set(adminAuthAtom, { token: null, email: '', isLoggedIn: false })
+export function clearInstructorSession() {
+  localStorage.removeItem('instructorToken')
+  localStorage.removeItem('instructorEmail')
+  appStore.set(instructorAuthAtom, { token: null, email: '', isLoggedIn: false })
 }

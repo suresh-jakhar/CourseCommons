@@ -8,7 +8,7 @@ const defaultValues = {
   isFree: true,
 }
 
-export default function AdminCourseForm({
+export default function InstructorCourseForm({
   initialValues = defaultValues,
   onSubmit,
   submitLabel,

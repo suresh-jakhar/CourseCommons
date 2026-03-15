@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import { useNavigate, Link, Navigate, useLocation } from 'react-router-dom'
 import { useAtomValue, useSetAtom } from 'jotai'
-import { adminSignin } from '../services/admin'
+import { instructorSignin } from '../services/instructor'
 import { getProfile, signin } from '../services/auth'
-import { adminAuthAtom } from '../state/adminAuthAtom'
+import { instructorAuthAtom } from '../state/instructorAuthAtom'
 import { authAtom } from '../state/authAtom'
 import { profileAtom } from '../state/profileAtom'
 import { enrolledCoursesAtom } from '../state/enrolledCoursesAtom'
-import { clearAdminSession, clearLearnerSession } from '../state/sessionActions'
+import { clearInstructorSession, clearLearnerSession } from '../state/sessionActions'
 
 function getSigninErrorMessage(userError, instructorError) {
   const instructorMessage = instructorError?.response?.data?.message
@@ -17,7 +17,7 @@ function getSigninErrorMessage(userError, instructorError) {
     return 'Invalid password'
   }
 
-  if (instructorMessage === 'Admin not found' && userMessage === 'User not found') {
+  if (instructorMessage === 'Instructor not found' && userMessage === 'User not found') {
     return 'No account found for this email'
   }
 
@@ -28,9 +28,9 @@ export default function Signin() {
   const navigate = useNavigate()
   const location = useLocation()
   const learnerAuth = useAtomValue(authAtom)
-  const instructorAuth = useAtomValue(adminAuthAtom)
+  const instructorAuth = useAtomValue(instructorAuthAtom)
   const setAuth = useSetAtom(authAtom)
-  const setInstructorAuth = useSetAtom(adminAuthAtom)
+  const setInstructorAuth = useSetAtom(instructorAuthAtom)
   const setProfile = useSetAtom(profileAtom)
   const setEnrolledCourses = useSetAtom(enrolledCoursesAtom)
   const [form, setForm] = useState({ email: '', password: '' })
@@ -55,13 +55,13 @@ export default function Signin() {
     setError('')
     setIsLoading(true)
     clearLearnerSession()
-    clearAdminSession()
+    clearInstructorSession()
     setEnrolledCourses([])
 
     try {
-      const instructorData = await adminSignin(form)
-      localStorage.setItem('adminToken', instructorData.token)
-      localStorage.setItem('adminEmail', form.email)
+      const instructorData = await instructorSignin(form)
+      localStorage.setItem('instructorToken', instructorData.token)
+      localStorage.setItem('instructorEmail', form.email)
       setInstructorAuth({ token: instructorData.token, email: form.email, isLoggedIn: true })
       navigate('/instructor/courses', { replace: true })
     } catch (instructorError) {

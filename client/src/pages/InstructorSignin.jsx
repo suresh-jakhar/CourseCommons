@@ -1,20 +1,20 @@
 import { useState } from 'react'
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { useAtomValue, useSetAtom } from 'jotai'
-import { adminSignin } from '../services/admin'
-import { adminAuthAtom } from '../state/adminAuthAtom'
+import { instructorSignin } from '../services/instructor'
+import { instructorAuthAtom } from '../state/instructorAuthAtom'
 
-export default function AdminSignin() {
+export default function InstructorSignin() {
   const navigate = useNavigate()
   const location = useLocation()
-  const adminAuth = useAtomValue(adminAuthAtom)
-  const setAdminAuth = useSetAtom(adminAuthAtom)
+  const instructorAuth = useAtomValue(instructorAuthAtom)
+  const setInstructorAuth = useSetAtom(instructorAuthAtom)
   const [form, setForm] = useState({ email: '', password: '' })
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
-  if (adminAuth.isLoggedIn) {
-    return <Navigate to="/admin/courses" replace />
+  if (instructorAuth.isLoggedIn) {
+    return <Navigate to="/instructor/courses" replace />
   }
 
   function handleChange(event) {
@@ -27,15 +27,15 @@ export default function AdminSignin() {
     setIsLoading(true)
 
     try {
-      const data = await adminSignin(form)
-      localStorage.setItem('adminToken', data.token)
-      localStorage.setItem('adminEmail', form.email)
-      setAdminAuth({ token: data.token, email: form.email, isLoggedIn: true })
+      const data = await instructorSignin(form)
+      localStorage.setItem('instructorToken', data.token)
+      localStorage.setItem('instructorEmail', form.email)
+      setInstructorAuth({ token: data.token, email: form.email, isLoggedIn: true })
 
-      const destination = location.state?.from || '/admin/courses'
+      const destination = location.state?.from || '/instructor/courses'
       navigate(destination, { replace: true })
     } catch (err) {
-      setError(err.response?.data?.message || 'Admin sign in failed. Please try again.')
+      setError(err.response?.data?.message || 'Instructor sign in failed. Please try again.')
     } finally {
       setIsLoading(false)
     }
@@ -45,11 +45,11 @@ export default function AdminSignin() {
     <div className="flex min-h-full items-center justify-center px-6 py-16">
       <div className="w-full max-w-md space-y-8">
         <div className="text-center">
-          <p className="text-sm font-medium uppercase tracking-[0.2em] text-blue-400">Admin access</p>
+          <p className="text-sm font-medium uppercase tracking-[0.2em] text-blue-400">Instructor access</p>
           <h1 className="mt-3 text-3xl font-bold text-white">Sign in to manage your courses</h1>
           <p className="mt-2 text-sm text-gray-400">
-            Need an admin account?{' '}
-            <Link to="/admin/signup" className="text-blue-400 hover:text-blue-300">
+            Need an instructor account?{' '}
+            <Link to="/instructor/signup" className="text-blue-400 hover:text-blue-300">
               Create one
             </Link>
           </p>
@@ -99,7 +99,7 @@ export default function AdminSignin() {
             disabled={isLoading}
             className="w-full rounded-lg bg-blue-500 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-400 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            {isLoading ? 'Signing in...' : 'Sign in as admin'}
+            {isLoading ? 'Signing in...' : 'Sign in as instructor'}
           </button>
         </form>
       </div>

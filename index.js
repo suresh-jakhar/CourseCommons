@@ -4,18 +4,16 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
-const { userRouter } = require("./routes/user");
-const { courseRouter } = require("./routes/course");
-const { adminRouter } = require("./routes/admin");
+const { userRoutes, courseRoutes, instructorRoutes } = require("./routes");
 
 const app = express();
 
 app.use(cors({ origin: "http://localhost:5173" }));
 app.use(express.json());
 
-app.use("/api/v1/user", userRouter);
-app.use("/api/v1/course", courseRouter);
-app.use("/api/v1/admin", adminRouter);
+app.use("/api/v1/user", userRoutes);
+app.use("/api/v1/course", courseRoutes);
+app.use("/api/v1/instructor", instructorRoutes);
 
 async function main(){
     await mongoose.connect(process.env.MONGO_URL);

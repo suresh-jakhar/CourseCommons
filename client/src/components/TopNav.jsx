@@ -1,10 +1,10 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAtom, useAtomValue } from 'jotai'
-import { adminAuthAtom } from '../state/adminAuthAtom'
+import { instructorAuthAtom } from '../state/instructorAuthAtom'
 import { authAtom } from '../state/authAtom'
 import { enrolledCoursesAtom } from '../state/enrolledCoursesAtom'
 import { profileAtom } from '../state/profileAtom'
-import { clearAdminSession, clearLearnerSession } from '../state/sessionActions'
+import { clearInstructorSession, clearLearnerSession } from '../state/sessionActions'
 
 export default function TopNav() {
   const location = useLocation()
@@ -12,8 +12,8 @@ export default function TopNav() {
   const [auth] = useAtom(authAtom)
   const [profile] = useAtom(profileAtom)
   const [, setEnrolledCourses] = useAtom(enrolledCoursesAtom)
-  const instructorAuth = useAtomValue(adminAuthAtom)
-  const isInstructorRoute = location.pathname.startsWith('/instructor') || location.pathname.startsWith('/admin')
+  const instructorAuth = useAtomValue(instructorAuthAtom)
+  const isInstructorRoute = location.pathname.startsWith('/instructor') || location.pathname.startsWith('/instructor')
 
   function handleLearnerSignout() {
     clearLearnerSession()
@@ -22,7 +22,7 @@ export default function TopNav() {
   }
 
   function handleInstructorSignout() {
-    clearAdminSession()
+    clearInstructorSession()
     navigate('/signin')
   }
 
