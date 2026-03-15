@@ -65,7 +65,7 @@ export default function InstructorEditCourse() {
 
     try {
       const response = await updateInstructorCourse(courseId, updatedCourse)
-      navigate('/instructor/courses', {
+      navigate('/dashboard/instructor/courses', {
         replace: true,
         state: { notice: response.message || 'Course updated successfully.' },
       })
@@ -104,7 +104,7 @@ export default function InstructorEditCourse() {
         )}
       </div>
 
-      <Link to="/instructor/courses" className="mt-6 inline-flex text-sm font-medium text-secondary hover:text-secondary">
+      <Link to="/dashboard/instructor/courses" className="mt-6 inline-flex text-sm font-medium text-secondary hover:text-secondary">
         Back to all courses
       </Link>
     </section>

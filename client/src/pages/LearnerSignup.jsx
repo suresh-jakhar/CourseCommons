@@ -14,11 +14,11 @@ export default function LearnerSignup() {
   const [isLoading, setIsLoading] = useState(false)
 
   if (learnerAuth.isLoggedIn) {
-    return <Navigate to="/my-courses" replace />
+    return <Navigate to="/dashboard/learner" replace />
   }
 
   if (instructorAuth.isLoggedIn) {
-    return <Navigate to="/instructor/courses" replace />
+    return <Navigate to="/dashboard/instructor" replace />
   }
 
   function handleChange(event) {

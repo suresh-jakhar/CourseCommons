@@ -99,7 +99,7 @@ export default function LearnerCourseDetail() {
         <div className="cinematic-panel max-w-md rounded-2xl p-8 text-center">
           <h1 className="cinematic-title mb-3 text-3xl font-semibold text-primary">Course Detail Page</h1>
           <p className="text-red-200">{error}</p>
-          <Link to="/my-courses" className="mt-4 inline-flex text-sm font-medium text-secondary hover:text-primary">
+          <Link to="/dashboard/learner/my-courses" className="mt-4 inline-flex text-sm font-medium text-secondary hover:text-primary">
             Back to My Courses
           </Link>
         </div>
@@ -116,7 +116,7 @@ export default function LearnerCourseDetail() {
             <h1 className="cinematic-title mt-2 text-3xl font-semibold text-primary md:text-4xl">{course.title}</h1>
             <p className="mt-3 max-w-3xl text-sm leading-7 text-secondary">{course.description}</p>
           </div>
-          <Link to="/my-courses" className="inline-flex text-sm font-medium text-secondary hover:text-primary">
+          <Link to="/dashboard/learner/my-courses" className="inline-flex text-sm font-medium text-secondary hover:text-primary">
             Back to My Courses
           </Link>
         </div>

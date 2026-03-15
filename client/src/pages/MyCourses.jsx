@@ -76,7 +76,7 @@ export default function MyCourses() {
         <div className="cinematic-panel rounded-2xl p-6">
           <h2 className="cinematic-title text-2xl font-semibold text-primary">No courses enrolled yet</h2>
           <p className="mt-2 text-sm text-secondary">Start from the Explore page and enroll in your first course.</p>
-          <Link to="/courses" className="cinematic-btn cinematic-btn-primary mt-5 inline-flex">
+          <Link to="/dashboard/learner/courses" className="cinematic-btn cinematic-btn-primary mt-5 inline-flex">
             Explore Courses
           </Link>
         </div>
@@ -94,7 +94,7 @@ export default function MyCourses() {
                 />
                 <div className="mt-3 flex items-center justify-between">
                   <span className="text-xs uppercase tracking-[0.18em] text-secondary">Active</span>
-                  <Link to={`/my-courses/${course._id}`} className="cinematic-btn text-xs">
+                  <Link to={`/dashboard/learner/my-courses/${course._id}`} className="cinematic-btn text-xs">
                     Open Course
                   </Link>
                 </div>

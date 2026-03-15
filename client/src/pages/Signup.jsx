@@ -8,11 +8,11 @@ export default function Signup() {
   const instructorAuth = useAtomValue(instructorAuthAtom)
 
   if (learnerAuth.isLoggedIn) {
-    return <Navigate to="/" replace />
+    return <Navigate to="/dashboard/learner" replace />
   }
 
   if (instructorAuth.isLoggedIn) {
-    return <Navigate to="/instructor/courses" replace />
+    return <Navigate to="/dashboard/instructor" replace />
   }
 
   return (

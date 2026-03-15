@@ -56,158 +56,68 @@ export default function TopNav() {
   }
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-surface backdrop-blur-xl relative">
-      <div className="mx-auto flex h-[68px] w-full max-w-[1440px] items-center gap-3 px-3 md:px-5 xl:px-8">
+    <nav className="nav-pill">
+      {/* Brand logo */}
+      <Link to="/" className="flex items-center gap-2 px-3">
+        <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-white/5 border border-white/5">
+          <img src={logo} alt="Logo" className="h-4 w-4 brightness-200" />
+        </div>
+        <span className="hidden font-semibold text-white/90 text-[13px] tracking-tight sm:inline-block">CourseCommons</span>
+      </Link>
 
-        {/* Logo — always visible */}
-        <Link to={isInstructor ? '/instructor/courses' : '/'} className="flex items-center gap-2 rounded-xl border border-border bg-glass px-3 py-2">
-          <img src={logo} alt="CourseCommons" className="h-5 w-5" />
-          <span className="cinematic-title text-sm font-semibold text-primary">CourseCommons</span>
+      <div className="h-4 w-[1px] bg-white/10 mx-1" />
+
+      {/* Nav Links - Centered capsule style */}
+      <div className="flex items-center gap-0.5 ml-1">
+        <Link to="/" className={`nav-link-capsule ${location.pathname === '/' ? 'nav-link-active' : ''}`}>
+          Home
         </Link>
+        <Link to="/features" className={`nav-link-capsule ${location.pathname === '/features' ? 'nav-link-active' : ''}`}>
+          Features
+        </Link>
+        <Link to="/community" className={`nav-link-capsule ${location.pathname === '/community' ? 'nav-link-active' : ''}`}>
+          Community
+        </Link>
+        <Link to="/creators" className={`nav-link-capsule ${location.pathname === '/creators' ? 'nav-link-active' : ''}`}>
+          Creators
+        </Link>
+        <Link to="/pricing" className={`nav-link-capsule ${location.pathname === '/pricing' ? 'nav-link-active' : ''}`}>
+          Pricing
+        </Link>
+      </div>
 
-        {/* Desktop nav pill — only rendered when there are links to show */}
-        {visibleLinks.length > 0 && (
-          <div className="hidden items-center gap-1 rounded-xl border border-border bg-glass p-1 lg:flex">
-            {visibleLinks.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                className={`rounded-lg px-3 py-2 text-sm transition ${
-                  isActive(location.pathname, item.to)
-                    ? 'bg-glass text-primary'
-                    : 'text-secondary hover:text-primary'
-                }`}
-              >
-                {item.label}
-              </Link>
-            ))}
+      {/* Search - Restored feature */}
+      <div className="nav-search-container">
+        <input 
+          type="text" 
+          placeholder="Type to search" 
+          className="nav-search-input"
+        />
+      </div>
+
+      {/* Auth Actions - Right side */}
+      <div className="flex items-center gap-2">
+        {isGuest && (
+          <>
+            <Link to="/signin" className="cinematic-btn-outline">Log in</Link>
+            <Link to="/signup" className="cinematic-btn-solid">Create Account</Link>
+          </>
+        )}
+        
+        {isLearner && (
+          <div className="flex items-center gap-3 pr-2">
+            <span className="text-[10px] text-muted tracking-wide uppercase px-2">{userName}</span>
+            <button onClick={handleLearnerSignout} className="cinematic-btn-outline">Sign out</button>
           </div>
         )}
 
-        {/* Desktop right-side controls */}
-        <div className="ml-auto hidden items-center gap-3 md:flex">
-
-          {/* Search, Notifications, Avatar — learners only */}
-          {isLearner && (
-            <div className="flex min-w-[220px] items-center gap-2 rounded-xl border border-border bg-glass px-3 py-2">
-              <span className="text-muted">Search</span>
-            </div>
-          )}
-          {isLearner && (
-            <button type="button" className="rounded-xl border border-border bg-glass px-3 py-2 text-sm text-secondary hover:text-primary">
-              Notifications
-            </button>
-          )}
-          {isLearner && (
-            <div className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-glass text-sm font-semibold text-primary">
-              {userName.trim().charAt(0).toUpperCase()}
-            </div>
-          )}
-
-          {/* User label + Sign out — per role */}
-          {isInstructor && (
-            <>
-              <span className="hidden rounded-xl border border-border bg-glass px-3 py-2 text-sm text-secondary xl:inline-block">
-                {instructorAuth.email}
-              </span>
-              <button type="button" onClick={handleInstructorSignout} className="cinematic-btn text-sm">
-                Sign out
-              </button>
-            </>
-          )}
-          {isLearner && (
-            <>
-              <span className="hidden rounded-xl border border-border bg-glass px-3 py-2 text-sm text-secondary xl:inline-block">
-                {userName}
-              </span>
-              <button type="button" onClick={handleLearnerSignout} className="cinematic-btn text-sm">
-                Sign out
-              </button>
-            </>
-          )}
-          {isGuest && (
-            <>
-              <Link to="/signup" className="cinematic-btn cinematic-btn-primary text-sm">Create Account</Link>
-              <Link to="/signin" className="cinematic-btn text-sm">Log in</Link>
-            </>
-          )}
-        </div>
-
-        {/* Mobile menu toggle */}
-        <button
-          type="button"
-          className="ml-auto rounded-lg border border-border bg-glass px-3 py-2 text-sm text-primary lg:hidden"
-          onClick={() => setIsOpen((prev) => !prev)}
-        >
-          Menu
-        </button>
+        {isInstructor && (
+          <div className="flex items-center gap-3 pr-2">
+            <span className="text-[10px] text-muted tracking-wide uppercase px-2">{instructorAuth.email}</span>
+            <button onClick={handleInstructorSignout} className="cinematic-btn-outline">Sign out</button>
+          </div>
+        )}
       </div>
-
-      {/* Mobile menu — role-aware, mirrors desktop logic */}
-      {isOpen && (
-        <div className="border-t border-border bg-surface px-3 py-4 lg:hidden">
-          <nav className="space-y-1">
-            {visibleLinks.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                onClick={() => setIsOpen(false)}
-                className={`block rounded-lg px-3 py-2 text-sm ${
-                  isActive(location.pathname, item.to)
-                    ? 'bg-glass text-primary'
-                    : 'text-secondary hover:bg-glass hover:text-primary'
-                }`}
-              >
-                {item.label}
-              </Link>
-            ))}
-
-            {/* Learner-only extra links */}
-            {isLearner && (
-              <Link to="/my-courses" onClick={() => setIsOpen(false)} className="block rounded-lg px-3 py-2 text-sm text-secondary hover:bg-glass hover:text-primary">
-                My Courses
-              </Link>
-            )}
-            {isLearner && (
-              <Link to="/profile" onClick={() => setIsOpen(false)} className="block rounded-lg px-3 py-2 text-sm text-secondary hover:bg-glass hover:text-primary">
-                Settings
-              </Link>
-            )}
-
-            {/* Auth action button */}
-            {isInstructor && (
-              <button
-                type="button"
-                onClick={() => { handleInstructorSignout(); setIsOpen(false) }}
-                className="block w-full rounded-lg px-3 py-2 text-left text-sm text-secondary hover:bg-glass hover:text-primary"
-              >
-                Sign out
-              </button>
-            )}
-            {isLearner && (
-              <button
-                type="button"
-                onClick={() => { handleLearnerSignout(); setIsOpen(false) }}
-                className="block w-full rounded-lg px-3 py-2 text-left text-sm text-secondary hover:bg-glass hover:text-primary"
-              >
-                Sign out
-              </button>
-            )}
-            {isGuest && (
-              <>
-                <Link to="/signin" onClick={() => setIsOpen(false)} className="block rounded-lg px-3 py-2 text-sm text-secondary hover:bg-glass hover:text-primary">
-                  Log in
-                </Link>
-                <Link to="/signup" onClick={() => setIsOpen(false)} className="block rounded-lg px-3 py-2 text-sm text-secondary hover:bg-glass hover:text-primary">
-                  Create Account
-                </Link>
-              </>
-            )}
-          </nav>
-        </div>
-      )}
-
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-[68px] bg-gradient-to-b from-white/10 to-transparent opacity-20" />
-    </header>
+    </nav>
   )
 }

@@ -62,8 +62,73 @@ body {
 
 .cinematic-spotlight {
 	background:
-		radial-gradient(200px 120px at 30% 30%, rgba(217,217,217,0.05), transparent 72%),
-		linear-gradient(180deg, theme('colors.surface') 0%, theme('colors.section') 100%);
+		radial-gradient(ellipse 60% 40% at 50% 0%, rgba(255, 255, 255, 0.15) 0%, transparent 80%),
+		linear-gradient(180deg, #04070d 0%, #020306 100%);
+}
+
+/* Conical Spotlight System - "The Lamp" */
+.spotlight-wrapper {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Inner beam - sharpest and brightest */
+.spotlight-cone {
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-54%);
+    width: 200vw;
+    height: 140vh;
+    background: radial-gradient(
+        ellipse 45% 85% at 50% 0%,
+        rgba(255, 255, 255, 0.22) 0%,
+        rgba(255, 255, 255, 0.12) 15%,
+        rgba(255, 255, 255, 0.04) 35%,
+        transparent 65%
+    );
+    filter: blur(80px);
+    mix-blend-mode: plus-lighter;
+    opacity: 0.9;
+}
+
+/* Secondary outer glow - provides the width */
+.spotlight-glow {
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150vw;
+    height: 100vh;
+    background: radial-gradient(
+        ellipse 65% 50% at 50% 0%,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0.02) 40%,
+        transparent 75%
+    );
+    filter: blur(120px);
+    mix-blend-mode: screen;
+}
+
+/* Central hotspot - source of the light */
+.spotlight-hotspot {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60vw;
+    height: 25vh;
+    background: radial-gradient(
+        circle at 50% 0%,
+        rgba(255, 255, 255, 0.25) 0%,
+        transparent 70%
+    );
+    filter: blur(40px);
+    mix-blend-mode: screen;
+    opacity: 0.8;
 }
 
 .cinematic-btn {
@@ -93,6 +158,149 @@ body {
 	background: rgba(77, 163, 255, 0.2);
     box-shadow: 0 0 25px rgba(77, 163, 255, 0.4), inset 0 0 15px rgba(77, 163, 255, 0.15);
     text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+/* Navigation & Pills */
+.nav-pill {
+    position: absolute;
+    top: 0.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0 0.5rem;
+    height: 3rem;
+    width: 96%;
+    max-width: 1600px;
+    background: rgba(13, 13, 18, 0.6);
+    backdrop-filter: blur(28px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 9999px;
+    box-shadow: 
+        0 10px 40px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    z-index: 100;
+    transition: all 0.3s ease;
+}
+
+/* Fixed variant for authenticated layouts */
+.nav-pill-fixed {
+    position: fixed;
+    top: 0.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0 0.5rem;
+    height: 3rem;
+    width: 96%;
+    max-width: 1600px;
+    background: rgba(13, 13, 18, 0.85);
+    backdrop-filter: blur(28px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 9999px;
+    box-shadow: 
+        0 10px 40px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    z-index: 100;
+    transition: all 0.3s ease;
+}
+
+.nav-link-capsule {
+    position: relative;
+    padding: 0.45rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: #9A9A9A;
+    transition: all 0.2s ease;
+}
+
+.nav-link-capsule:hover {
+    color: white;
+}
+
+.nav-link-active {
+    background: rgba(255, 255, 255, 0.08);
+    color: white !important;
+}
+
+.nav-link-active::after {
+    content: '';
+    position: absolute;
+    bottom: -0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1.5rem;
+    height: 1.5px;
+    background: white;
+    border-radius: 99px;
+    box-shadow: 0 0 12px rgba(255, 255, 255, 1);
+}
+
+.nav-search-container {
+    display: flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 9999px;
+    padding: 0.35rem 1rem;
+    margin-left: auto;
+    margin-right: 0.5rem;
+    width: 340px;
+    transition: all 0.2s ease;
+}
+
+.nav-search-container:focus-within {
+    border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.35);
+}
+
+.nav-search-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 0.8125rem;
+    width: 100%;
+}
+
+.nav-search-input::placeholder {
+    color: #5A5A5A;
+}
+
+.cinematic-btn-outline {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: transparent;
+    border-radius: 9999px;
+    padding: 0.4rem 1.25rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+    transition: all 0.15s ease;
+}
+
+.cinematic-btn-outline:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.cinematic-btn-solid {
+    background: white;
+    color: black !important;
+    border-radius: 9999px;
+    padding: 0.4rem 1.5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    transition: all 0.15s ease;
+}
+
+.cinematic-btn-solid:hover {
+    background: #f8f8f8;
+    transform: translateY(-0.5px);
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.15);
 }
 
 .cinematic-title {
