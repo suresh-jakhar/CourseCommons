@@ -29,3 +29,8 @@ export async function deleteAdminCourse(courseId) {
   const response = await adminApi.delete(`/admin/course/delete/${courseId}`)
   return response.data
 }
+
+export async function getCourseLearners(courseId) {
+  const response = await adminApi.get(`/admin/course/${courseId}/learners`)
+  return response.data
+}

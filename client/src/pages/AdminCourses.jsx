@@ -170,6 +170,12 @@ export default function AdminCourses() {
 
                 <div className="flex flex-wrap gap-3">
                   <Link
+                    to={`/instructor/courses/${course._id}/learners`}
+                    className="rounded-lg border border-emerald-500/40 px-4 py-2 text-sm font-medium text-emerald-300 hover:bg-emerald-500/10"
+                  >
+                    View learners
+                  </Link>
+                  <Link
                     to={`/instructor/courses/${course._id}/edit`}
                     className="rounded-lg border border-gray-700 px-4 py-2 text-sm font-medium text-gray-200 hover:text-white"
                   >
