@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useAtom } from 'jotai'
 import { getMyCourses } from '../services/course'
 import { enrolledCoursesAtom } from '../state/enrolledCoursesAtom'
@@ -89,7 +90,15 @@ export default function MyCourses() {
                     <p className="mt-2 text-sm leading-6 text-gray-300">{course.description}</p>
                   </div>
 
-                  <p className="text-sm font-medium text-emerald-300">Enrolled</p>
+                  <div className="flex items-center justify-between">
+                    <p className="text-sm font-medium text-emerald-300">Enrolled</p>
+                    <Link
+                      to={`/my-courses/${course._id}`}
+                      className="rounded-lg border border-gray-700 px-3 py-1.5 text-xs font-medium text-gray-200 hover:text-white"
+                    >
+                      Open course
+                    </Link>
+                  </div>
                 </div>
               </article>
             ))}
@@ -140,7 +149,15 @@ export default function MyCourses() {
                     <p className="mt-2 text-sm leading-6 text-gray-300">{course.description}</p>
                   </div>
 
-                  <p className="text-sm font-medium text-emerald-300">Enrolled</p>
+                  <div className="flex items-center justify-between">
+                    <p className="text-sm font-medium text-emerald-300">Enrolled</p>
+                    <Link
+                      to={`/my-courses/${course._id}`}
+                      className="rounded-lg border border-gray-700 px-3 py-1.5 text-xs font-medium text-gray-200 hover:text-white"
+                    >
+                      Open course
+                    </Link>
+                  </div>
                 </div>
               </article>
             ))}
@@ -201,7 +218,15 @@ export default function MyCourses() {
                 <p className="mt-2 text-sm leading-6 text-gray-300">{course.description}</p>
               </div>
 
-              <p className="text-sm font-medium text-emerald-300">Enrolled</p>
+              <div className="flex items-center justify-between">
+                <p className="text-sm font-medium text-emerald-300">Enrolled</p>
+                <Link
+                  to={`/my-courses/${course._id}`}
+                  className="rounded-lg border border-gray-700 px-3 py-1.5 text-xs font-medium text-gray-200 hover:text-white"
+                >
+                  Open course
+                </Link>
+              </div>
             </div>
           </article>
         ))}

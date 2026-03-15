@@ -1,12 +1,12 @@
 import axios from 'axios'
-import { clearAdminSession } from '../state/sessionActions'
+import { clearInstructorSession } from '../state/sessionActions'
 
-const adminApi = axios.create({
+const instructorApi = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
 })
 
-adminApi.interceptors.request.use((config) => {
-  const token = localStorage.getItem('adminToken')
+instructorApi.interceptors.request.use((config) => {
+  const token = localStorage.getItem('instructorToken')
 
   if (token) {
     config.headers.Authorization = `Bearer ${token}`
@@ -15,14 +15,14 @@ adminApi.interceptors.request.use((config) => {
   return config
 })
 
-adminApi.interceptors.response.use(
+instructorApi.interceptors.response.use(
   (response) => response,
   (error) => {
     const status = error.response?.status
     const hasAuthHeader = Boolean(error.config?.headers?.Authorization)
 
     if (hasAuthHeader && (status === 401 || status === 403)) {
-      clearAdminSession()
+      clearInstructorSession()
 
       if (typeof window !== 'undefined') {
         const currentPath = window.location.pathname
@@ -37,4 +37,4 @@ adminApi.interceptors.response.use(
   },
 )
 
-export default adminApi
+export default instructorApi

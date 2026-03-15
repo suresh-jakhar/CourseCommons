@@ -1,11 +1,11 @@
 import { Link, Navigate } from 'react-router-dom'
 import { useAtomValue } from 'jotai'
-import { adminAuthAtom } from '../state/adminAuthAtom'
+import { instructorAuthAtom } from '../state/instructorAuthAtom'
 import { authAtom } from '../state/authAtom'
 
 export default function Signup() {
   const learnerAuth = useAtomValue(authAtom)
-  const instructorAuth = useAtomValue(adminAuthAtom)
+  const instructorAuth = useAtomValue(instructorAuthAtom)
 
   if (learnerAuth.isLoggedIn) {
     return <Navigate to="/" replace />

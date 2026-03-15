@@ -2,13 +2,13 @@ import { useState } from 'react'
 import { useNavigate, Link, Navigate } from 'react-router-dom'
 import { useAtomValue } from 'jotai'
 import { signup } from '../services/auth'
-import { adminAuthAtom } from '../state/adminAuthAtom'
+import { instructorAuthAtom } from '../state/instructorAuthAtom'
 import { authAtom } from '../state/authAtom'
 
 export default function LearnerSignup() {
   const navigate = useNavigate()
   const learnerAuth = useAtomValue(authAtom)
-  const instructorAuth = useAtomValue(adminAuthAtom)
+  const instructorAuth = useAtomValue(instructorAuthAtom)
   const [form, setForm] = useState({ firstName: '', lastName: '', email: '', password: '' })
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)

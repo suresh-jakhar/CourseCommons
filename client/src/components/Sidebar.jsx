@@ -1,11 +1,11 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useAtomValue } from 'jotai'
-import { adminAuthAtom } from '../state/adminAuthAtom'
+import { instructorAuthAtom } from '../state/instructorAuthAtom'
 
 export default function Sidebar() {
   const location = useLocation()
-  const instructorAuth = useAtomValue(adminAuthAtom)
-  const isInstructorRoute = location.pathname.startsWith('/instructor') || location.pathname.startsWith('/admin')
+  const instructorAuth = useAtomValue(instructorAuthAtom)
+  const isInstructorRoute = location.pathname.startsWith('/instructor') || location.pathname.startsWith('/instructor')
 
   return (
     <aside className="w-56 border-r border-gray-800 bg-gray-900/40 p-4 hidden sm:block">

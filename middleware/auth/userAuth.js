@@ -1,20 +1,17 @@
 const jwt = require("jsonwebtoken");
+const { extractBearerToken } = require("./extractBearerToken");
 
 const USER_JWT_SECRET = process.env.USER_JWT_SECRET;
 
 function userAuth(req, res, next){
 
-    const authHeader = req.headers.authorization;
+    const token = extractBearerToken(req.headers.authorization);
 
-    if(!authHeader){
+    if(!token){
         return res.status(401).json({
             message: "Token missing"
         });
     }
-
-    const token = authHeader.startsWith("Bearer ")
-        ? authHeader.slice(7)
-        : authHeader;
 
     try{
 

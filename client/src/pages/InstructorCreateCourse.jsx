@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import AdminCourseForm from '../components/AdminCourseForm'
-import { createAdminCourse } from '../services/admin'
+import InstructorCourseForm from '../components/InstructorCourseForm'
+import { createInstructorCourse } from '../services/instructor'
 
 function getCourseSaveError(err) {
   return err.response?.data?.message || 'Unable to save this course right now.'
 }
 
-export default function AdminCreateCourse() {
+export default function InstructorCreateCourse() {
   const navigate = useNavigate()
   const [error, setError] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -17,7 +17,7 @@ export default function AdminCreateCourse() {
     setIsSubmitting(true)
 
     try {
-      const response = await createAdminCourse(course)
+      const response = await createInstructorCourse(course)
       navigate('/instructor/courses', {
         replace: true,
         state: { notice: response.message || 'Course created successfully.' },
@@ -32,7 +32,7 @@ export default function AdminCreateCourse() {
   return (
     <section className="px-6 py-8 lg:px-10">
       <div className="mb-8 space-y-3">
-        <p className="text-sm font-medium uppercase tracking-[0.2em] text-blue-400">Admin workspace</p>
+        <p className="text-sm font-medium uppercase tracking-[0.2em] text-blue-400">Instructor workspace</p>
         <h1 className="text-4xl font-bold text-white">Create a new course</h1>
         <p className="max-w-2xl text-sm leading-6 text-gray-300">
           Set up the course metadata, pricing model, and cover image learners will see in the catalog.
@@ -40,7 +40,7 @@ export default function AdminCreateCourse() {
       </div>
 
       <div className="rounded-2xl border border-gray-800 bg-gray-900/60 p-6">
-        <AdminCourseForm
+        <InstructorCourseForm
           submitLabel="Create course"
           isSubmitting={isSubmitting}
           error={error}

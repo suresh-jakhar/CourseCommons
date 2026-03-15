@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { useAtomValue } from 'jotai'
-import { adminSignup } from '../services/admin'
-import { adminAuthAtom } from '../state/adminAuthAtom'
+import { instructorSignup } from '../services/instructor'
+import { instructorAuthAtom } from '../state/instructorAuthAtom'
 import { authAtom } from '../state/authAtom'
 
-export default function AdminSignup() {
+export default function InstructorSignup() {
   const navigate = useNavigate()
-  const instructorAuth = useAtomValue(adminAuthAtom)
+  const instructorAuth = useAtomValue(instructorAuthAtom)
   const learnerAuth = useAtomValue(authAtom)
   const [form, setForm] = useState({ firstName: '', lastName: '', email: '', password: '' })
   const [error, setError] = useState('')
@@ -31,7 +31,7 @@ export default function AdminSignup() {
     setIsLoading(true)
 
     try {
-      await adminSignup(form)
+      await instructorSignup(form)
       navigate('/signin', {
         replace: true,
         state: { notice: 'Instructor account created. Sign in to manage your courses.' },

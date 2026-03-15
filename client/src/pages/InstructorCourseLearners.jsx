@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { getCourseLearners } from '../services/admin'
+import { getCourseLearners } from '../services/instructor'
 
 function getLearnersErrorMessage(err) {
   return err.response?.data?.message || 'Unable to load enrolled learners right now.'

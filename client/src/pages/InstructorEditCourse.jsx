@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import AdminCourseForm from '../components/AdminCourseForm'
-import { getAdminCourses, updateAdminCourse } from '../services/admin'
+import InstructorCourseForm from '../components/InstructorCourseForm'
+import { getInstructorCourses, updateInstructorCourse } from '../services/instructor'
 
 function getCourseSaveError(err) {
   return err.response?.data?.message || 'Unable to save this course right now.'
 }
 
-export default function AdminEditCourse() {
+export default function InstructorEditCourse() {
   const navigate = useNavigate()
   const { courseId } = useParams()
   const [course, setCourse] = useState(null)
@@ -20,7 +20,7 @@ export default function AdminEditCourse() {
 
     async function loadCourse() {
       try {
-        const courses = await getAdminCourses()
+        const courses = await getInstructorCourses()
         const matchedCourse = courses.find((item) => item._id === courseId)
 
         if (!isMounted) {
@@ -28,7 +28,7 @@ export default function AdminEditCourse() {
         }
 
         if (!matchedCourse) {
-          setError('Course not found in your admin catalog.')
+          setError('Course not found in your instructor catalog.')
           return
         }
 
@@ -64,7 +64,7 @@ export default function AdminEditCourse() {
     setIsSubmitting(true)
 
     try {
-      const response = await updateAdminCourse(courseId, updatedCourse)
+      const response = await updateInstructorCourse(courseId, updatedCourse)
       navigate('/instructor/courses', {
         replace: true,
         state: { notice: response.message || 'Course updated successfully.' },
@@ -79,10 +79,10 @@ export default function AdminEditCourse() {
   return (
     <section className="px-6 py-8 lg:px-10">
       <div className="mb-8 space-y-3">
-        <p className="text-sm font-medium uppercase tracking-[0.2em] text-blue-400">Admin workspace</p>
+        <p className="text-sm font-medium uppercase tracking-[0.2em] text-blue-400">Instructor workspace</p>
         <h1 className="text-4xl font-bold text-white">Edit course</h1>
         <p className="max-w-2xl text-sm leading-6 text-gray-300">
-          Update course details and pricing without leaving the admin workspace.
+          Update course details and pricing without leaving the instructor workspace.
         </p>
       </div>
 
@@ -90,7 +90,7 @@ export default function AdminEditCourse() {
         {isLoading ? (
           <p className="text-sm text-gray-300">Loading course details...</p>
         ) : course ? (
-          <AdminCourseForm
+          <InstructorCourseForm
             initialValues={course}
             submitLabel="Save changes"
             isSubmitting={isSubmitting}

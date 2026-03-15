@@ -1,12 +1,12 @@
 import { Navigate, useLocation } from 'react-router-dom'
 import { useAtomValue } from 'jotai'
-import { adminAuthAtom } from '../state/adminAuthAtom'
+import { instructorAuthAtom } from '../state/instructorAuthAtom'
 
-export default function AdminProtectedRoute({ children }) {
-  const adminAuth = useAtomValue(adminAuthAtom)
+export default function InstructorProtectedRoute({ children }) {
+  const instructorAuth = useAtomValue(instructorAuthAtom)
   const location = useLocation()
 
-  if (!adminAuth.isLoggedIn) {
+  if (!instructorAuth.isLoggedIn) {
     return <Navigate to="/signin" replace state={{ from: location.pathname }} />
   }
 
