@@ -54,7 +54,7 @@ export default function InstructorCourseForm({
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div>
-        <label htmlFor="title" className="mb-1.5 block text-sm font-medium text-gray-300">
+        <label htmlFor="title" className="mb-1.5 block text-sm font-medium text-secondary">
           Course title
         </label>
         <input
@@ -65,13 +65,13 @@ export default function InstructorCourseForm({
           required
           value={form.title}
           onChange={handleChange}
-          className="w-full rounded-lg border border-gray-700 bg-gray-900 px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none"
+          className="w-full rounded-lg border border-border bg-[#141414] px-4 py-2.5 text-sm text-primary placeholder-muted focus:border-[#2F2F2F] focus:ring-1 focus:ring-[#2F2F2F] focus:outline-none"
           placeholder="Design systems for product teams"
         />
       </div>
 
       <div>
-        <label htmlFor="description" className="mb-1.5 block text-sm font-medium text-gray-300">
+        <label htmlFor="description" className="mb-1.5 block text-sm font-medium text-secondary">
           Description
         </label>
         <textarea
@@ -82,13 +82,13 @@ export default function InstructorCourseForm({
           value={form.description}
           onChange={handleChange}
           rows={5}
-          className="w-full rounded-lg border border-gray-700 bg-gray-900 px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none"
+          className="w-full rounded-lg border border-border bg-transparent px-4 py-3 text-sm text-primary placeholder-muted focus:border-[#2F2F2F] focus:ring-1 focus:ring-[#2F2F2F] focus:outline-none"
           placeholder="Explain what learners will get from this course."
         />
       </div>
 
       <div>
-        <label htmlFor="imageUrl" className="mb-1.5 block text-sm font-medium text-gray-300">
+        <label htmlFor="imageUrl" className="mb-1.5 block text-sm font-medium text-secondary">
           Cover image URL
         </label>
         <input
@@ -98,25 +98,25 @@ export default function InstructorCourseForm({
           required
           value={form.imageUrl}
           onChange={handleChange}
-          className="w-full rounded-lg border border-gray-700 bg-gray-900 px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none"
+          className="w-full rounded-lg border border-border bg-[#141414] px-4 py-2.5 text-sm text-primary placeholder-muted focus:border-[#2F2F2F] focus:ring-1 focus:ring-[#2F2F2F] focus:outline-none"
           placeholder="https://images.example.com/course-cover.jpg"
         />
       </div>
 
       <div className="grid gap-4 md:grid-cols-[1fr,220px]">
-        <label className="flex items-center gap-3 rounded-xl border border-gray-800 bg-gray-900/60 px-4 py-3 text-sm text-gray-200">
+        <label className="flex items-center gap-3 rounded-xl border border-border bg-surface px-4 py-3 text-sm text-secondary">
           <input
             name="isFree"
             type="checkbox"
             checked={form.isFree}
             onChange={handleChange}
-            className="h-4 w-4 rounded border-gray-600 bg-gray-900 text-blue-500 focus:ring-blue-500"
+            className="h-4 w-4 rounded border-muted bg-[#141414] text-muted focus:ring-glass"
           />
           This is a free course
         </label>
 
         <div>
-          <label htmlFor="price" className="mb-1.5 block text-sm font-medium text-gray-300">
+          <label htmlFor="price" className="mb-1.5 block text-sm font-medium text-secondary">
             Price
           </label>
           <input
@@ -128,7 +128,7 @@ export default function InstructorCourseForm({
             disabled={form.isFree}
             value={form.isFree ? '0' : form.price}
             onChange={handleChange}
-            className="w-full rounded-lg border border-gray-700 bg-gray-900 px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-60"
+            className="w-full rounded-lg border border-border bg-[#141414] px-4 py-2.5 text-sm text-primary placeholder-muted focus:border-[#2F2F2F] focus:ring-1 focus:ring-[#2F2F2F] focus:outline-none disabled:cursor-not-allowed disabled:opacity-60"
             placeholder="49"
           />
         </div>
@@ -143,7 +143,7 @@ export default function InstructorCourseForm({
       <button
         type="submit"
         disabled={isSubmitting}
-        className="rounded-lg bg-blue-500 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-400 disabled:cursor-not-allowed disabled:opacity-50"
+        className="rounded-lg bg-btn text-primary px-5 py-2.5 text-sm font-semibold text-primary hover:bg-btn-hover disabled:cursor-not-allowed disabled:opacity-50"
       >
         {isSubmitting ? 'Saving...' : submitLabel}
       </button>

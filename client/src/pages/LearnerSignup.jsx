@@ -14,7 +14,7 @@ export default function LearnerSignup() {
   const [isLoading, setIsLoading] = useState(false)
 
   if (learnerAuth.isLoggedIn) {
-    return <Navigate to="/" replace />
+    return <Navigate to="/my-courses" replace />
   }
 
   if (instructorAuth.isLoggedIn) {
@@ -47,11 +47,11 @@ export default function LearnerSignup() {
     <div className="flex min-h-full items-center justify-center px-6 py-16">
       <div className="w-full max-w-md space-y-8">
         <div className="text-center">
-          <p className="text-sm font-medium uppercase tracking-[0.2em] text-blue-400">Learner account</p>
-          <h1 className="mt-3 text-3xl font-bold text-white">Create your learner account</h1>
-          <p className="mt-2 text-sm text-gray-400">
+          <p className="text-sm font-medium uppercase tracking-[0.2em] text-secondary">Learner account</p>
+          <h1 className="mt-3 text-3xl font-bold text-primary">Create your learner account</h1>
+          <p className="mt-2 text-sm text-secondary">
             Want to teach instead?{' '}
-            <Link to="/signup/instructor" className="text-blue-400 hover:text-blue-300">
+            <Link to="/signup/instructor" className="text-secondary hover:text-secondary">
               Sign up as an instructor
             </Link>
           </p>
@@ -60,7 +60,7 @@ export default function LearnerSignup() {
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label htmlFor="firstName" className="block text-sm font-medium text-gray-300 mb-1.5">
+              <label htmlFor="firstName" className="block text-sm font-medium text-secondary mb-1.5">
                 First name
               </label>
               <input
@@ -71,13 +71,13 @@ export default function LearnerSignup() {
                 minLength={2}
                 value={form.firstName}
                 onChange={handleChange}
-                className="w-full rounded-lg border border-gray-700 bg-gray-900 px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none"
+                className="w-full cinematic-btn cinematic-btn-primary py-2.5 text-sm font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
                 placeholder="John"
               />
             </div>
 
             <div>
-              <label htmlFor="lastName" className="block text-sm font-medium text-gray-300 mb-1.5">
+              <label htmlFor="lastName" className="block text-sm font-medium text-secondary mb-1.5">
                 Last name
               </label>
               <input
@@ -88,14 +88,14 @@ export default function LearnerSignup() {
                 minLength={2}
                 value={form.lastName}
                 onChange={handleChange}
-                className="w-full rounded-lg border border-gray-700 bg-gray-900 px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none"
+                className="w-full cinematic-btn cinematic-btn-primary py-2.5 text-sm font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
                 placeholder="Doe"
               />
             </div>
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1.5">
+            <label htmlFor="email" className="block text-sm font-medium text-secondary mb-1.5">
               Email address
             </label>
             <input
@@ -105,13 +105,13 @@ export default function LearnerSignup() {
               required
               value={form.email}
               onChange={handleChange}
-              className="w-full rounded-lg border border-gray-700 bg-gray-900 px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none"
+              className="w-full cinematic-btn cinematic-btn-primary py-2.5 text-sm font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
               placeholder="john@example.com"
             />
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-1.5">
+            <label htmlFor="password" className="block text-sm font-medium text-secondary mb-1.5">
               Password
             </label>
             <input
@@ -122,7 +122,7 @@ export default function LearnerSignup() {
               minLength={6}
               value={form.password}
               onChange={handleChange}
-              className="w-full rounded-lg border border-gray-700 bg-gray-900 px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none"
+              className="w-full cinematic-btn cinematic-btn-primary py-2.5 text-sm font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
               placeholder="At least 6 characters"
             />
           </div>
@@ -136,7 +136,7 @@ export default function LearnerSignup() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full rounded-lg bg-blue-500 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-400 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full cinematic-btn cinematic-btn-primary py-2.5 text-sm font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isLoading ? 'Creating account...' : 'Create learner account'}
           </button>

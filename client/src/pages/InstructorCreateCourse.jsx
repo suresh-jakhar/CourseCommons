@@ -32,14 +32,14 @@ export default function InstructorCreateCourse() {
   return (
     <section className="px-6 py-8 lg:px-10">
       <div className="mb-8 space-y-3">
-        <p className="text-sm font-medium uppercase tracking-[0.2em] text-blue-400">Instructor workspace</p>
-        <h1 className="text-4xl font-bold text-white">Create a new course</h1>
-        <p className="max-w-2xl text-sm leading-6 text-gray-300">
+        <p className="text-sm font-medium uppercase tracking-[0.2em] text-secondary">Instructor workspace</p>
+        <h1 className="text-4xl font-bold text-primary">Create a new course</h1>
+        <p className="max-w-2xl text-sm leading-6 text-secondary">
           Set up the course metadata, pricing model, and cover image learners will see in the catalog.
         </p>
       </div>
 
-      <div className="rounded-2xl border border-gray-800 bg-gray-900/60 p-6">
+      <div className="rounded-2xl border border-border bg-surface p-6">
         <InstructorCourseForm
           submitLabel="Create course"
           isSubmitting={isSubmitting}
@@ -48,7 +48,7 @@ export default function InstructorCreateCourse() {
         />
       </div>
 
-      <Link to="/instructor/courses" className="mt-6 inline-flex text-sm font-medium text-blue-400 hover:text-blue-300">
+      <Link to="/instructor/courses" className="mt-6 inline-flex text-sm font-medium text-secondary hover:text-secondary">
         Back to all courses
       </Link>
     </section>

@@ -50,17 +50,17 @@ export default function InstructorCourseLearners() {
   return (
     <section className="px-6 py-8 lg:px-10">
       <div className="mb-8">
-        <p className="text-sm font-medium uppercase tracking-[0.2em] text-blue-400">Instructor workspace</p>
-        <h1 className="mt-2 text-4xl font-bold text-white">Enrolled learners</h1>
+        <p className="text-sm font-medium uppercase tracking-[0.2em] text-secondary">Instructor workspace</p>
+        <h1 className="mt-2 text-4xl font-bold text-primary">Enrolled learners</h1>
         {course && (
-          <p className="mt-2 text-sm text-gray-300">
-            Course: <span className="font-medium text-white">{course.title}</span>
+          <p className="mt-2 text-sm text-secondary">
+            Course: <span className="font-medium text-primary">{course.title}</span>
           </p>
         )}
       </div>
 
       {isLoading ? (
-        <div className="rounded-2xl border border-gray-800 bg-gray-900/60 p-8 text-sm text-gray-300">
+        <div className="rounded-2xl border border-border bg-surface p-8 text-sm text-secondary">
           Loading learners...
         </div>
       ) : error ? (
@@ -69,34 +69,34 @@ export default function InstructorCourseLearners() {
         </div>
       ) : (
         <>
-          <div className="mb-6 rounded-2xl border border-gray-800 bg-gray-900/60 p-5">
-            <p className="text-sm text-gray-400">Total enrolled learners</p>
-            <p className="mt-3 text-3xl font-semibold text-white">{learners.length}</p>
+          <div className="mb-6 rounded-2xl border border-border bg-surface p-5">
+            <p className="text-sm text-secondary">Total enrolled learners</p>
+            <p className="mt-3 text-3xl font-semibold text-primary">{learners.length}</p>
           </div>
 
           {learners.length === 0 ? (
-            <div className="rounded-2xl border border-gray-800 bg-gray-900/60 p-8">
-              <h2 className="text-2xl font-semibold text-white">No learners enrolled yet</h2>
-              <p className="mt-3 text-sm leading-6 text-gray-300">
+            <div className="rounded-2xl border border-border bg-surface p-8">
+              <h2 className="text-2xl font-semibold text-primary">No learners enrolled yet</h2>
+              <p className="mt-3 text-sm leading-6 text-secondary">
                 Once learners enroll in this course, their profile details will appear here.
               </p>
             </div>
           ) : (
-            <div className="overflow-hidden rounded-2xl border border-gray-800 bg-gray-900/60">
+            <div className="overflow-hidden rounded-2xl border border-border bg-surface">
               <table className="w-full text-left text-sm">
-                <thead className="bg-gray-900">
-                  <tr className="border-b border-gray-800 text-gray-300">
+                <thead className="bg-surface">
+                  <tr className="border-b border-border text-secondary">
                     <th className="px-5 py-3 font-medium">Name</th>
                     <th className="px-5 py-3 font-medium">Email</th>
                   </tr>
                 </thead>
                 <tbody>
                   {learners.map((learner) => (
-                    <tr key={learner._id} className="border-b border-gray-800 last:border-b-0">
-                      <td className="px-5 py-3 text-white">
+                    <tr key={learner._id} className="border-b border-border last:border-b-0">
+                      <td className="px-5 py-3 text-primary">
                         {learner.firstName} {learner.lastName}
                       </td>
-                      <td className="px-5 py-3 text-gray-300">{learner.email}</td>
+                      <td className="px-5 py-3 text-secondary">{learner.email}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -106,7 +106,7 @@ export default function InstructorCourseLearners() {
         </>
       )}
 
-      <Link to="/instructor/courses" className="mt-6 inline-flex text-sm font-medium text-blue-400 hover:text-blue-300">
+      <Link to="/instructor/courses" className="mt-6 inline-flex text-sm font-medium text-secondary hover:text-secondary">
         Back to all courses
       </Link>
     </section>

@@ -1,3 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+	color-scheme: dark;
+}
+
+body {
+	margin: 0;
+	min-height: 100vh;
+	font-family: 'Manrope', sans-serif;
+	background-color: theme('colors.base');
+	background-image:
+		radial-gradient(circle at 80% 20%, rgba(217,217,217,0.03), transparent 40%),
+		radial-gradient(circle at 20% 80%, rgba(168,176,178,0.02), transparent 40%);
+	color: theme('colors.primary');
+}
+
+#root {
+	min-height: 100vh;
+}
+
+.cinematic-app {
+	position: relative;
+	isolation: isolate;
+}
+
+.cinematic-app::before {
+	content: '';
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+	background:
+		radial-gradient(circle at 50% 0%, rgba(229,229,229,0.02), transparent 50%);
+	z-index: -1;
+}
+
+.cinematic-panel {
+	border: 1px solid theme('colors.border');
+	background: theme('colors.surface');
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02), 0 16px 34px rgba(0, 0, 0, 0.4);
+	backdrop-filter: blur(8px);
+}
+
+.cinematic-card {
+	border-radius: 1rem;
+	border: 1px solid theme('colors.border');
+	background: theme('colors.card');
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+	padding: 1rem;
+}
+
+/* Glass UI Elements */
+.glass-panel {
+    background: theme('colors.glass');
+    backdrop-filter: blur(20px);
+    box-shadow: inset 0 1px 0 theme('colors.glass-glow');
+}
+
+.cinematic-spotlight {
+	background:
+		radial-gradient(200px 120px at 30% 30%, rgba(217,217,217,0.05), transparent 72%),
+		linear-gradient(180deg, theme('colors.surface') 0%, theme('colors.section') 100%);
+}
+
+.cinematic-btn {
+	border-radius: 0.6rem;
+	border: 1px solid theme('colors.border');
+	background: theme('colors.btn');
+	color: theme('colors.primary');
+	padding: 0.45rem 0.8rem;
+	font-weight: 500;
+	transition: all 0.2s ease;
+}
+
+.cinematic-btn:hover {
+	border-color: theme('colors.muted');
+	background: theme('colors.btn-hover');
+}
+
+.cinematic-btn-primary {
+	border-color: rgba(77, 163, 255, 0.5);
+	background: rgba(77, 163, 255, 0.1);
+	color: theme('colors.primary');
+    box-shadow: 0 0 15px rgba(77, 163, 255, 0.15), inset 0 0 10px rgba(77, 163, 255, 0.05);
+}
+
+.cinematic-btn-primary:hover {
+	border-color: rgba(77, 163, 255, 0.8);
+	background: rgba(77, 163, 255, 0.2);
+    box-shadow: 0 0 25px rgba(77, 163, 255, 0.4), inset 0 0 15px rgba(77, 163, 255, 0.15);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+.cinematic-title {
+	font-family: 'Sora', sans-serif;
+	letter-spacing: -0.02em;
+}
+
+/* Fix text heading colors */
+h1, h2, h3, h4, h5, h6 {
+	color: theme('colors.primary') !important;
+}
+
+p {
+	color: theme('colors.secondary');
+}
+
+/* Override Browser Autofill Styles for Inputs */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px #141414 inset !important;
+    -webkit-text-fill-color: white !important;
+    transition: background-color 5000s ease-in-out 0s;
+}

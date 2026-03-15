@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useAtom } from 'jotai'
 import { getMyCourses } from '../services/course'
 import { enrolledCoursesAtom } from '../state/enrolledCoursesAtom'
+import { CourseCard, SectionHeader } from '../components/SurfaceCards'
 
 function getErrorMessage(err) {
   const status = err.response?.status
@@ -51,186 +52,57 @@ export default function MyCourses() {
     return () => {
       isMounted = false
     }
-  }, [])
+  }, [setCourses])
 
   if (isLoading) {
-    if (courses.length > 0) {
-      return (
-        <section className="px-6 py-8">
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-white">My Courses</h1>
-            <p className="mt-2 text-sm text-gray-400">Courses you are currently enrolled in.</p>
-          </div>
-
-          {error && (
-            <p className="mb-6 text-sm text-amber-300">{error}</p>
-          )}
-
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {courses.map((course) => (
-              <article
-                key={course._id}
-                className="overflow-hidden rounded-2xl border border-gray-800 bg-gray-900/60"
-              >
-                {course.imageUrl ? (
-                  <img
-                    src={course.imageUrl}
-                    alt={course.title}
-                    className="h-48 w-full object-cover"
-                  />
-                ) : (
-                  <div className="flex h-48 items-center justify-center bg-gray-800 text-sm text-gray-400">
-                    No image available
-                  </div>
-                )}
-
-                <div className="space-y-4 p-5">
-                  <div>
-                    <h2 className="text-xl font-semibold text-white">{course.title}</h2>
-                    <p className="mt-2 text-sm leading-6 text-gray-300">{course.description}</p>
-                  </div>
-
-                  <div className="flex items-center justify-between">
-                    <p className="text-sm font-medium text-emerald-300">Enrolled</p>
-                    <Link
-                      to={`/my-courses/${course._id}`}
-                      className="rounded-lg border border-gray-700 px-3 py-1.5 text-xs font-medium text-gray-200 hover:text-white"
-                    >
-                      Open course
-                    </Link>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-      )
-    }
-
-    return (
-      <div className="flex min-h-full items-center justify-center px-6 py-16">
-        <p className="text-lg text-gray-300">Loading your courses...</p>
-      </div>
-    )
-  }
-
-  if (error) {
-    if (courses.length > 0) {
-      return (
-        <section className="px-6 py-8">
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-white">My Courses</h1>
-            <p className="mt-2 text-sm text-gray-400">Courses you are currently enrolled in.</p>
-          </div>
-
-          <p className="mb-6 text-sm text-amber-300">{error}</p>
-
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {courses.map((course) => (
-              <article
-                key={course._id}
-                className="overflow-hidden rounded-2xl border border-gray-800 bg-gray-900/60"
-              >
-                {course.imageUrl ? (
-                  <img
-                    src={course.imageUrl}
-                    alt={course.title}
-                    className="h-48 w-full object-cover"
-                  />
-                ) : (
-                  <div className="flex h-48 items-center justify-center bg-gray-800 text-sm text-gray-400">
-                    No image available
-                  </div>
-                )}
-
-                <div className="space-y-4 p-5">
-                  <div>
-                    <h2 className="text-xl font-semibold text-white">{course.title}</h2>
-                    <p className="mt-2 text-sm leading-6 text-gray-300">{course.description}</p>
-                  </div>
-
-                  <div className="flex items-center justify-between">
-                    <p className="text-sm font-medium text-emerald-300">Enrolled</p>
-                    <Link
-                      to={`/my-courses/${course._id}`}
-                      className="rounded-lg border border-gray-700 px-3 py-1.5 text-xs font-medium text-gray-200 hover:text-white"
-                    >
-                      Open course
-                    </Link>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-      )
-    }
-
-    return (
-      <div className="flex min-h-full items-center justify-center px-6 py-16">
-        <div className="max-w-md text-center">
-          <h1 className="mb-3 text-3xl font-bold text-white">My Courses</h1>
-          <p className="text-red-300">{error}</p>
-        </div>
-      </div>
-    )
-  }
-
-  if (courses.length === 0) {
-    return (
-      <div className="flex min-h-full items-center justify-center px-6 py-16">
-        <div className="max-w-md text-center">
-          <h1 className="mb-3 text-3xl font-bold text-white">My Courses</h1>
-          <p className="text-gray-300">You have not enrolled in any courses yet.</p>
-        </div>
-      </div>
-    )
+    return <div className="flex min-h-full items-center justify-center text-secondary">Loading your courses...</div>
   }
 
   return (
-    <section className="px-6 py-8">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-white">My Courses</h1>
-        <p className="mt-2 text-sm text-gray-400">Courses you are currently enrolled in.</p>
+    <section className="space-y-6 p-4 md:p-6">
+      <div className="cinematic-panel rounded-2xl p-5 md:p-6">
+        <p className="text-xs uppercase tracking-[0.2em] text-muted">Learning</p>
+        <h1 className="cinematic-title mt-2 text-3xl font-semibold text-primary md:text-4xl">My Courses Page</h1>
+        <p className="mt-3 text-sm text-secondary md:text-base">All enrolled courses in one clean responsive view.</p>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-        {courses.map((course) => (
-          <article
-            key={course._id}
-            className="overflow-hidden rounded-2xl border border-gray-800 bg-gray-900/60"
-          >
-            {course.imageUrl ? (
-              <img
-                src={course.imageUrl}
-                alt={course.title}
-                className="h-48 w-full object-cover"
-              />
-            ) : (
-              <div className="flex h-48 items-center justify-center bg-gray-800 text-sm text-gray-400">
-                No image available
-              </div>
-            )}
+      {error && (
+        <div className="rounded-2xl border border-border bg-glass px-4 py-3 text-sm text-secondary">
+          {error}
+        </div>
+      )}
 
-            <div className="space-y-4 p-5">
-              <div>
-                <h2 className="text-xl font-semibold text-white">{course.title}</h2>
-                <p className="mt-2 text-sm leading-6 text-gray-300">{course.description}</p>
+      {courses.length === 0 ? (
+        <div className="cinematic-panel rounded-2xl p-6">
+          <h2 className="cinematic-title text-2xl font-semibold text-primary">No courses enrolled yet</h2>
+          <p className="mt-2 text-sm text-secondary">Start from the Explore page and enroll in your first course.</p>
+          <Link to="/courses" className="cinematic-btn cinematic-btn-primary mt-5 inline-flex">
+            Explore Courses
+          </Link>
+        </div>
+      ) : (
+        <>
+          <SectionHeader title="Enrolled Courses" />
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {courses.map((course) => (
+              <div key={course._id} className="cinematic-card">
+                <CourseCard
+                  title={course.title}
+                  subtitle="Enrolled"
+                  description={course.description}
+                  imageUrl={course.imageUrl}
+                />
+                <div className="mt-3 flex items-center justify-between">
+                  <span className="text-xs uppercase tracking-[0.18em] text-secondary">Active</span>
+                  <Link to={`/my-courses/${course._id}`} className="cinematic-btn text-xs">
+                    Open Course
+                  </Link>
+                </div>
               </div>
-
-              <div className="flex items-center justify-between">
-                <p className="text-sm font-medium text-emerald-300">Enrolled</p>
-                <Link
-                  to={`/my-courses/${course._id}`}
-                  className="rounded-lg border border-gray-700 px-3 py-1.5 text-xs font-medium text-gray-200 hover:text-white"
-                >
-                  Open course
-                </Link>
-              </div>
-            </div>
-          </article>
-        ))}
-      </div>
+            ))}
+          </div>
+        </>
+      )}
     </section>
   )
 }
