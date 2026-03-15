@@ -79,16 +79,16 @@ export default function InstructorEditCourse() {
   return (
     <section className="px-6 py-8 lg:px-10">
       <div className="mb-8 space-y-3">
-        <p className="text-sm font-medium uppercase tracking-[0.2em] text-blue-400">Instructor workspace</p>
-        <h1 className="text-4xl font-bold text-white">Edit course</h1>
-        <p className="max-w-2xl text-sm leading-6 text-gray-300">
+        <p className="text-sm font-medium uppercase tracking-[0.2em] text-secondary">Instructor workspace</p>
+        <h1 className="text-4xl font-bold text-primary">Edit course</h1>
+        <p className="max-w-2xl text-sm leading-6 text-secondary">
           Update course details and pricing without leaving the instructor workspace.
         </p>
       </div>
 
-      <div className="rounded-2xl border border-gray-800 bg-gray-900/60 p-6">
+      <div className="rounded-2xl border border-border bg-surface p-6">
         {isLoading ? (
-          <p className="text-sm text-gray-300">Loading course details...</p>
+          <p className="text-sm text-secondary">Loading course details...</p>
         ) : course ? (
           <InstructorCourseForm
             initialValues={course}
@@ -104,7 +104,7 @@ export default function InstructorEditCourse() {
         )}
       </div>
 
-      <Link to="/instructor/courses" className="mt-6 inline-flex text-sm font-medium text-blue-400 hover:text-blue-300">
+      <Link to="/instructor/courses" className="mt-6 inline-flex text-sm font-medium text-secondary hover:text-secondary">
         Back to all courses
       </Link>
     </section>

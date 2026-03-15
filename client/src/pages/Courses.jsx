@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useAtom } from 'jotai'
 import { enrollInCourse, getCoursePreview, getMyCourses, purchaseCourse } from '../services/course'
 import { enrolledCoursesAtom } from '../state/enrolledCoursesAtom'
+import { CourseCard, SectionHeader } from '../components/SurfaceCards'
 
 function getActionErrorMessage(err, fallbackMessage) {
   const status = err.response?.status
@@ -211,8 +212,8 @@ export default function Courses() {
 
   if (isLoading) {
     return (
-      <div className="flex min-h-full items-center justify-center px-6 py-16">
-        <p className="text-lg text-gray-300">Loading courses...</p>
+      <div className="flex min-h-full items-center justify-center px-6 py-16 text-secondary">
+        Loading courses...
       </div>
     )
   }
@@ -220,9 +221,9 @@ export default function Courses() {
   if (error) {
     return (
       <div className="flex min-h-full items-center justify-center px-6 py-16">
-        <div className="max-w-md text-center">
-          <h1 className="mb-3 text-3xl font-bold text-white">Courses</h1>
-          <p className="text-red-300">{error}</p>
+        <div className="cinematic-panel max-w-md rounded-2xl p-8 text-center">
+          <h1 className="cinematic-title mb-3 text-3xl font-semibold text-primary">Course Page</h1>
+          <p className="text-red-200">{error}</p>
         </div>
       </div>
     )
@@ -231,49 +232,34 @@ export default function Courses() {
   if (courses.length === 0) {
     return (
       <div className="flex min-h-full items-center justify-center px-6 py-16">
-        <div className="max-w-md text-center">
-          <h1 className="mb-3 text-3xl font-bold text-white">Courses</h1>
-          <p className="text-gray-300">No courses are available yet.</p>
+        <div className="cinematic-panel max-w-md rounded-2xl p-8 text-center">
+          <h1 className="cinematic-title mb-3 text-3xl font-semibold text-primary">Course Page</h1>
+          <p className="text-secondary">No courses are available yet.</p>
         </div>
       </div>
     )
   }
 
   return (
-    <section className="px-6 py-8">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-white">Courses</h1>
-        <p className="mt-2 text-sm text-gray-400">Preview the currently available courses.</p>
+    <section className="space-y-6 p-4 md:p-6">
+      <div className="cinematic-panel rounded-2xl p-5 md:p-6">
+        <p className="text-xs uppercase tracking-[0.2em] text-muted">Explore</p>
+        <h1 className="cinematic-title mt-2 text-3xl font-semibold text-primary md:text-4xl">Course Page</h1>
+        <p className="mt-3 max-w-3xl text-sm text-secondary md:text-base">Discover free and paid courses in a cleaner cinematic catalog.</p>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+      <SectionHeader title="Available Courses" />
+
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {courses.map((course) => (
-          <article
-            key={course._id}
-            className="overflow-hidden rounded-2xl border border-gray-800 bg-gray-900/60"
-          >
-            {course.imageUrl ? (
-              <img
-                src={course.imageUrl}
-                alt={course.title}
-                className="h-48 w-full object-cover"
-              />
-            ) : (
-              <div className="flex h-48 items-center justify-center bg-gray-800 text-sm text-gray-400">
-                No image available
-              </div>
-            )}
-
-            <div className="space-y-4 p-5">
-              <div>
-                <h2 className="text-xl font-semibold text-white">{course.title}</h2>
-                <p className="mt-2 text-sm leading-6 text-gray-300">{course.description}</p>
-              </div>
-
-              <p className="text-sm font-medium text-blue-300">
-                {course.isFree ? 'Free' : `Price: $${course.price}`}
-              </p>
-
+          <div key={course._id} className="cinematic-card">
+            <CourseCard
+              title={course.title}
+              subtitle={course.isFree ? 'Free course' : `Price $${course.price}`}
+              description={course.description}
+              imageUrl={course.imageUrl}
+            />
+            <div className="mt-2">
               {(() => {
                 const action = courseActions[course._id] || { status: 'idle' }
 
@@ -282,7 +268,7 @@ export default function Courses() {
                     <button
                       type="button"
                       disabled
-                      className="w-full rounded-lg border border-emerald-500/40 bg-emerald-500/10 px-4 py-2 text-sm font-semibold text-emerald-300"
+                      className="w-full rounded-lg border border-border bg-surface px-4 py-2 text-sm font-semibold text-secondary"
                     >
                       Enrolled
                     </button>
@@ -295,7 +281,7 @@ export default function Courses() {
                       type="button"
                       onClick={() => handlePurchase(course._id)}
                       disabled={action.status === 'purchasing'}
-                      className="w-full rounded-lg bg-amber-500 px-4 py-2 text-sm font-semibold text-black hover:bg-amber-400 disabled:cursor-not-allowed disabled:opacity-50"
+                      className="w-full rounded-lg border border-border bg-surface px-4 py-2 text-sm font-semibold text-primary hover:bg-surface disabled:cursor-not-allowed disabled:opacity-50"
                     >
                       {action.status === 'purchasing' ? 'Purchasing...' : 'Purchase'}
                     </button>
@@ -307,7 +293,7 @@ export default function Courses() {
                     type="button"
                     onClick={() => handleEnroll(course._id)}
                     disabled={action.status === 'enrolling'}
-                    className="w-full rounded-lg bg-blue-500 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-400 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="w-full rounded-lg border border-border bg-surface px-4 py-2 text-sm font-semibold text-primary hover:bg-surface disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     {action.status === 'enrolling' ? 'Enrolling...' : 'Enroll'}
                   </button>
@@ -316,19 +302,19 @@ export default function Courses() {
 
               {courseActions[course._id]?.message && (
                 <p
-                  className={`text-sm ${
+                  className={`mt-3 text-sm ${
                     courseActions[course._id].type === 'error'
-                      ? 'text-red-300'
+                      ? 'text-red-200'
                       : courseActions[course._id].type === 'info'
-                        ? 'text-amber-300'
-                        : 'text-emerald-300'
+                        ? 'text-secondary'
+                        : 'text-secondary'
                   }`}
                 >
                   {courseActions[course._id].message}
                 </p>
               )}
             </div>
-          </article>
+          </div>
         ))}
       </div>
     </section>

@@ -1,59 +1,39 @@
 import { Link, useLocation } from 'react-router-dom'
-import { useAtomValue } from 'jotai'
-import { instructorAuthAtom } from '../state/instructorAuthAtom'
 
 export default function Sidebar() {
   const location = useLocation()
-  const instructorAuth = useAtomValue(instructorAuthAtom)
-  const isInstructorRoute = location.pathname.startsWith('/instructor') || location.pathname.startsWith('/instructor')
+
+  const links = [
+    { to: '/', label: 'Home' },
+    { to: '/my-courses', label: 'My Courses' },
+    { to: '/community', label: 'Community' },
+    { to: '/courses', label: 'Explore' },
+    { to: '/profile', label: 'Settings' },
+  ]
 
   return (
-    <aside className="w-56 border-r border-gray-800 bg-gray-900/40 p-4 hidden sm:block">
-      {isInstructorRoute ? (
-        <>
-          <p className="mb-3 text-xs uppercase tracking-wide text-gray-400">Instructor</p>
-          <ul className="space-y-2 text-sm text-gray-200">
-            <li>
-              <Link to="/instructor/courses" className="hover:text-blue-300">Course Catalog</Link>
+    <aside className="cinematic-panel hidden w-64 shrink-0 rounded-2xl p-4 lg:block xl:w-72">
+      <p className="mb-3 px-2 text-xs uppercase tracking-[0.2em] text-muted">Navigation</p>
+      <ul className="space-y-1.5">
+        {links.map((item) => {
+          const active = item.to === '/' ? location.pathname === '/' : location.pathname.startsWith(item.to)
+
+          return (
+            <li key={item.to}>
+              <Link
+                to={item.to}
+                className={`block rounded-xl px-3 py-2.5 text-sm transition ${
+                  active
+                    ? 'bg-glass text-primary'
+                    : 'text-secondary hover:bg-glass hover:text-primary'
+                }`}
+              >
+                {item.label}
+              </Link>
             </li>
-            {instructorAuth.isLoggedIn ? (
-              <li>
-                <Link to="/instructor/courses/new" className="hover:text-blue-300">Create Course</Link>
-              </li>
-            ) : (
-              <>
-                <li>
-                  <Link to="/signin" className="hover:text-blue-300">Sign In</Link>
-                </li>
-                <li>
-                  <Link to="/signup" className="hover:text-blue-300">Choose Account Type</Link>
-                </li>
-              </>
-            )}
-          </ul>
-        </>
-      ) : (
-        <>
-          <p className="text-xs uppercase tracking-wide text-gray-400 mb-3">Sidebar</p>
-          <ul className="space-y-2 text-sm text-gray-200">
-            <li>
-              <Link to="/" className="hover:text-blue-300">Dashboard</Link>
-            </li>
-            <li>
-              <Link to="/my-courses" className="hover:text-blue-300">My Courses</Link>
-            </li>
-            <li>
-              <Link to="/community" className="hover:text-blue-300">Community</Link>
-            </li>
-            <li>
-              <Link to="/channels" className="hover:text-blue-300">Channels</Link>
-            </li>
-            <li>
-              <Link to="/announcements" className="hover:text-blue-300">Announcements</Link>
-            </li>
-          </ul>
-        </>
-      )}
+          )
+        })}
+      </ul>
     </aside>
   )
 }

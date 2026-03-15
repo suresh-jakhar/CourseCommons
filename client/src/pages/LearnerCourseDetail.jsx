@@ -87,8 +87,8 @@ export default function LearnerCourseDetail() {
 
   if (isLoading) {
     return (
-      <div className="flex min-h-full items-center justify-center px-6 py-16">
-        <p className="text-lg text-gray-300">Loading course details...</p>
+      <div className="flex min-h-full items-center justify-center px-6 py-16 text-secondary">
+        Loading course details...
       </div>
     )
   }
@@ -96,10 +96,10 @@ export default function LearnerCourseDetail() {
   if (error && !course) {
     return (
       <div className="flex min-h-full items-center justify-center px-6 py-16">
-        <div className="max-w-md text-center">
-          <h1 className="mb-3 text-3xl font-bold text-white">Course detail</h1>
-          <p className="text-red-300">{error}</p>
-          <Link to="/my-courses" className="mt-4 inline-flex text-sm font-medium text-blue-400 hover:text-blue-300">
+        <div className="cinematic-panel max-w-md rounded-2xl p-8 text-center">
+          <h1 className="cinematic-title mb-3 text-3xl font-semibold text-primary">Course Detail Page</h1>
+          <p className="text-red-200">{error}</p>
+          <Link to="/my-courses" className="mt-4 inline-flex text-sm font-medium text-secondary hover:text-primary">
             Back to My Courses
           </Link>
         </div>
@@ -108,77 +108,82 @@ export default function LearnerCourseDetail() {
   }
 
   return (
-    <section className="px-6 py-8 lg:px-10">
-      <div className="mb-8 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
-        <div>
-          <p className="text-sm font-medium uppercase tracking-[0.2em] text-blue-400">Learner course detail</p>
-          <h1 className="mt-2 text-4xl font-bold text-white">{course.title}</h1>
-          <p className="mt-3 max-w-3xl text-sm leading-6 text-gray-300">{course.description}</p>
+    <section className="space-y-6 p-4 md:p-6">
+      <div className="cinematic-panel rounded-2xl p-5 md:p-6">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p className="text-xs uppercase tracking-[0.2em] text-muted">Course Detail</p>
+            <h1 className="cinematic-title mt-2 text-3xl font-semibold text-primary md:text-4xl">{course.title}</h1>
+            <p className="mt-3 max-w-3xl text-sm leading-7 text-secondary">{course.description}</p>
+          </div>
+          <Link to="/my-courses" className="inline-flex text-sm font-medium text-secondary hover:text-primary">
+            Back to My Courses
+          </Link>
         </div>
-        <Link to="/my-courses" className="inline-flex text-sm font-medium text-blue-400 hover:text-blue-300">
-          Back to My Courses
-        </Link>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-3">
+        <div className="cinematic-card">
+          <p className="text-xs uppercase tracking-[0.2em] text-muted">Progress</p>
+          <p className="mt-2 text-4xl font-semibold text-primary">{progress.percentComplete}%</p>
+        </div>
+        <div className="cinematic-card md:col-span-2">
+          <p className="text-xs uppercase tracking-[0.2em] text-muted">Last Opened</p>
+          <p className="mt-2 text-lg text-secondary">{formatLastOpened(progress.lastOpenedAt)}</p>
+        </div>
       </div>
 
       {(error || notice) && (
         <div
-          className={`mb-6 rounded-2xl px-5 py-4 text-sm ${
+          className={`rounded-2xl px-5 py-4 text-sm ${
             error
-              ? 'border border-red-500/30 bg-red-500/10 text-red-300'
-              : 'border border-emerald-500/30 bg-emerald-500/10 text-emerald-300'
+              ? 'border border-red-500/30 bg-red-500/10 text-red-200'
+              : 'border border-border bg-surface text-secondary'
           }`}
         >
           {error || notice}
         </div>
       )}
 
-      <div className="mb-8 rounded-2xl border border-gray-800 bg-gray-900/60 p-6">
-        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <div>
-            <p className="text-sm text-gray-400">Progress</p>
-            <p className="mt-2 text-3xl font-semibold text-white">{progress.percentComplete}%</p>
-            <p className="mt-2 text-sm text-gray-400">Last opened: {formatLastOpened(progress.lastOpenedAt)}</p>
-          </div>
-
-          <div className="flex flex-wrap gap-3">
-            <button
-              type="button"
-              disabled={isSaving}
-              onClick={() => handleIncreaseBy(10)}
-              className="rounded-lg border border-gray-700 px-4 py-2 text-sm font-medium text-gray-200 hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              +10%
-            </button>
-            <button
-              type="button"
-              disabled={isSaving}
-              onClick={() => handleIncreaseBy(25)}
-              className="rounded-lg border border-gray-700 px-4 py-2 text-sm font-medium text-gray-200 hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              +25%
-            </button>
-            <button
-              type="button"
-              disabled={isSaving}
-              onClick={() => saveProgress(100)}
-              className="rounded-lg bg-emerald-500 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              Mark complete
-            </button>
-            <button
-              type="button"
-              disabled={isSaving}
-              onClick={() => saveProgress(0)}
-              className="rounded-lg border border-amber-500/50 px-4 py-2 text-sm font-medium text-amber-300 hover:bg-amber-500/10 disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              Reset
-            </button>
-          </div>
+      <div className="cinematic-panel rounded-2xl p-5 md:p-6">
+        <div className="flex flex-wrap gap-3">
+          <button
+            type="button"
+            disabled={isSaving}
+            onClick={() => handleIncreaseBy(10)}
+            className="cinematic-btn disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            +10%
+          </button>
+          <button
+            type="button"
+            disabled={isSaving}
+            onClick={() => handleIncreaseBy(25)}
+            className="cinematic-btn disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            +25%
+          </button>
+          <button
+            type="button"
+            disabled={isSaving}
+            onClick={() => saveProgress(100)}
+            className="cinematic-btn cinematic-btn-primary disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            Mark Complete
+          </button>
+          <button
+            type="button"
+            disabled={isSaving}
+            onClick={() => saveProgress(0)}
+            className="cinematic-btn disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            Reset
+          </button>
         </div>
 
-        <div className="mt-6 h-3 w-full overflow-hidden rounded-full bg-gray-800">
+        <div className="mt-6 h-3 w-full overflow-hidden rounded-full bg-glass">
           <div
-            className="h-full rounded-full bg-blue-500 transition-all duration-300"
+            className="h-full rounded-full bg-surface transition-all duration-300"
             style={{ width: `${progress.percentComplete}%` }}
           />
         </div>

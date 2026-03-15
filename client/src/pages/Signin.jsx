@@ -43,7 +43,7 @@ export default function Signin() {
   }
 
   if (learnerAuth.isLoggedIn) {
-    return <Navigate to="/" replace />
+    return <Navigate to="/my-courses" replace />
   }
 
   function handleChange(e) {
@@ -71,7 +71,7 @@ export default function Signin() {
         setAuth({ token: data.token, isLoggedIn: true })
         const user = await getProfile()
         setProfile(user)
-        navigate('/', { replace: true })
+        navigate('/my-courses', { replace: true })
       } catch (userError) {
         setError(getSigninErrorMessage(userError, instructorError))
       }
@@ -84,13 +84,13 @@ export default function Signin() {
     <div className="flex min-h-full items-center justify-center px-6 py-16">
       <div className="w-full max-w-md space-y-8">
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-white">Sign in to your account</h1>
-          <p className="mt-2 text-sm text-gray-400">
+          <h1 className="text-3xl font-bold text-primary">Sign in to your account</h1>
+          <p className="mt-2 text-sm text-secondary">
             We will route you to the right dashboard automatically.
           </p>
-          <p className="mt-2 text-sm text-gray-400">
+          <p className="mt-2 text-sm text-secondary">
             Don't have an account yet?{' '}
-            <Link to="/signup" className="text-blue-400 hover:text-blue-300">
+            <Link to="/signup" className="text-secondary hover:text-secondary">
               Sign up
             </Link>
           </p>
@@ -104,7 +104,7 @@ export default function Signin() {
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1.5">
+            <label htmlFor="email" className="block text-sm font-medium text-secondary mb-1.5">
               Email address
             </label>
             <input
@@ -114,13 +114,13 @@ export default function Signin() {
               required
               value={form.email}
               onChange={handleChange}
-              className="w-full rounded-lg border border-gray-700 bg-gray-900 px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none"
+              className="w-full cinematic-btn cinematic-btn-primary py-2.5 text-sm font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
               placeholder="john@example.com"
             />
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-1.5">
+            <label htmlFor="password" className="block text-sm font-medium text-secondary mb-1.5">
               Password
             </label>
             <input
@@ -130,7 +130,7 @@ export default function Signin() {
               required
               value={form.password}
               onChange={handleChange}
-              className="w-full rounded-lg border border-gray-700 bg-gray-900 px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none"
+              className="w-full cinematic-btn cinematic-btn-primary py-2.5 text-sm font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
               placeholder="Your password"
             />
           </div>
@@ -144,7 +144,7 @@ export default function Signin() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full rounded-lg bg-blue-500 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-400 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full cinematic-btn cinematic-btn-primary py-2.5 text-sm font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isLoading ? 'Signing in...' : 'Continue'}
           </button>

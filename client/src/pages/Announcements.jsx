@@ -1,15 +1,38 @@
+import { UpdateCard, SectionHeader } from '../components/SurfaceCards'
+
+const announcements = [
+  {
+    title: 'Live workshop this Friday',
+    meta: 'UI architecture session with practical redesign walkthrough.',
+    time: '2 hours ago',
+  },
+  {
+    title: 'Course update policy revised',
+    meta: 'Instructors can now pin weekly recap notes in each course module.',
+    time: '5 hours ago',
+  },
+  {
+    title: 'New onboarding challenge',
+    meta: 'First-time learners can unlock a guided challenge in Explore.',
+    time: '8 hours ago',
+  },
+]
+
 export default function Announcements() {
   return (
-    <div className="flex min-h-full items-center justify-center px-6 py-16">
-      <div className="max-w-xl text-center">
-        <p className="mb-3 text-sm font-medium uppercase tracking-[0.2em] text-blue-400">
-          Coming Soon
-        </p>
-        <h1 className="mb-4 text-3xl font-bold text-white">Announcements</h1>
-        <p className="text-gray-300">
-          Announcement features will be available once backend support is ready.
-        </p>
+    <section className="space-y-6 p-4 md:p-6">
+      <div className="cinematic-panel rounded-2xl p-5 md:p-6">
+        <p className="text-xs uppercase tracking-[0.2em] text-muted">Announcements</p>
+        <h1 className="cinematic-title mt-2 text-3xl font-semibold text-primary md:text-4xl">Announcements Page</h1>
+        <p className="mt-3 max-w-3xl text-sm text-secondary md:text-base">Important updates from instructors, platform team, and course communities.</p>
       </div>
-    </div>
+
+      <SectionHeader title="Latest Announcements" />
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        {announcements.map((item) => (
+          <UpdateCard key={item.title} title={item.title} meta={item.meta} time={item.time} />
+        ))}
+      </div>
+    </section>
   )
 }

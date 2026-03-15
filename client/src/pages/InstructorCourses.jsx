@@ -84,16 +84,16 @@ export default function InstructorCourses() {
     <section className="px-6 py-8 lg:px-10">
       <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <p className="text-sm font-medium uppercase tracking-[0.2em] text-blue-400">Instructor workspace</p>
-          <h1 className="mt-2 text-4xl font-bold text-white">Manage your course catalog</h1>
-          <p className="mt-3 max-w-2xl text-sm leading-6 text-gray-300">
+          <p className="text-sm font-medium uppercase tracking-[0.2em] text-secondary">Instructor workspace</p>
+          <h1 className="mt-2 text-4xl font-bold text-primary">Manage your course catalog</h1>
+          <p className="mt-3 max-w-2xl text-sm leading-6 text-secondary">
             Create, update, and retire the courses you publish on CourseCommons.
           </p>
         </div>
 
         <Link
           to="/instructor/courses/new"
-          className="inline-flex rounded-lg bg-blue-500 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-400"
+          className="inline-flex rounded-lg bg-btn text-primary px-4 py-2.5 text-sm font-semibold text-primary hover:bg-btn-hover"
         >
           Create course
         </Link>
@@ -112,33 +112,33 @@ export default function InstructorCourses() {
       )}
 
       <div className="mb-8 grid gap-5 md:grid-cols-3">
-        <div className="rounded-2xl border border-gray-800 bg-gray-900/60 p-5">
-          <p className="text-sm text-gray-400">Total courses</p>
-          <p className="mt-3 text-3xl font-semibold text-white">{courses.length}</p>
+        <div className="rounded-2xl border border-border bg-surface p-5">
+          <p className="text-sm text-secondary">Total courses</p>
+          <p className="mt-3 text-3xl font-semibold text-primary">{courses.length}</p>
         </div>
-        <div className="rounded-2xl border border-gray-800 bg-gray-900/60 p-5">
-          <p className="text-sm text-gray-400">Free courses</p>
-          <p className="mt-3 text-3xl font-semibold text-white">{freeCourseCount}</p>
+        <div className="rounded-2xl border border-border bg-surface p-5">
+          <p className="text-sm text-secondary">Free courses</p>
+          <p className="mt-3 text-3xl font-semibold text-primary">{freeCourseCount}</p>
         </div>
-        <div className="rounded-2xl border border-gray-800 bg-gray-900/60 p-5">
-          <p className="text-sm text-gray-400">Paid courses</p>
-          <p className="mt-3 text-3xl font-semibold text-white">{paidCourseCount}</p>
+        <div className="rounded-2xl border border-border bg-surface p-5">
+          <p className="text-sm text-secondary">Paid courses</p>
+          <p className="mt-3 text-3xl font-semibold text-primary">{paidCourseCount}</p>
         </div>
       </div>
 
       {isLoading ? (
-        <div className="rounded-2xl border border-gray-800 bg-gray-900/60 p-8 text-sm text-gray-300">
+        <div className="rounded-2xl border border-border bg-surface p-8 text-sm text-secondary">
           Loading your instructor courses...
         </div>
       ) : courses.length === 0 ? (
-        <div className="rounded-2xl border border-gray-800 bg-gray-900/60 p-8">
-          <h2 className="text-2xl font-semibold text-white">No courses published yet</h2>
-          <p className="mt-3 max-w-2xl text-sm leading-6 text-gray-300">
+        <div className="rounded-2xl border border-border bg-surface p-8">
+          <h2 className="text-2xl font-semibold text-primary">No courses published yet</h2>
+          <p className="mt-3 max-w-2xl text-sm leading-6 text-secondary">
             Start by creating your first course. You can make it free or paid and edit it later.
           </p>
           <Link
             to="/instructor/courses/new"
-            className="mt-6 inline-flex rounded-lg bg-blue-500 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-400"
+            className="mt-6 inline-flex rounded-lg bg-btn text-primary px-4 py-2.5 text-sm font-semibold text-primary hover:bg-btn-hover"
           >
             Create your first course
           </Link>
@@ -146,11 +146,11 @@ export default function InstructorCourses() {
       ) : (
         <div className="grid gap-6 xl:grid-cols-2">
           {courses.map((course) => (
-            <article key={course._id} className="overflow-hidden rounded-2xl border border-gray-800 bg-gray-900/60">
+            <article key={course._id} className="overflow-hidden rounded-2xl border border-border bg-surface">
               {course.imageUrl ? (
                 <img src={course.imageUrl} alt={course.title} className="h-52 w-full object-cover" />
               ) : (
-                <div className="flex h-52 items-center justify-center bg-gray-800 text-sm text-gray-400">
+                <div className="flex h-52 items-center justify-center bg-surface text-sm text-secondary">
                   No image available
                 </div>
               )}
@@ -158,15 +158,15 @@ export default function InstructorCourses() {
               <div className="space-y-5 p-5">
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <h2 className="text-2xl font-semibold text-white">{course.title}</h2>
-                    <p className="mt-2 text-sm text-gray-400">{formatPrice(course)}</p>
+                    <h2 className="text-2xl font-semibold text-primary">{course.title}</h2>
+                    <p className="mt-2 text-sm text-secondary">{formatPrice(course)}</p>
                   </div>
-                  <span className="rounded-full border border-gray-700 px-3 py-1 text-xs uppercase tracking-wide text-gray-300">
+                  <span className="rounded-full border border-border px-3 py-1 text-xs uppercase tracking-wide text-secondary">
                     {course.isFree ? 'Free' : 'Paid'}
                   </span>
                 </div>
 
-                <p className="text-sm leading-6 text-gray-300">{course.description}</p>
+                <p className="text-sm leading-6 text-secondary">{course.description}</p>
 
                 <div className="flex flex-wrap gap-3">
                   <Link
@@ -177,7 +177,7 @@ export default function InstructorCourses() {
                   </Link>
                   <Link
                     to={`/instructor/courses/${course._id}/edit`}
-                    className="rounded-lg border border-gray-700 px-4 py-2 text-sm font-medium text-gray-200 hover:text-white"
+                    className="rounded-lg border border-border px-4 py-2 text-sm font-medium text-secondary hover:text-primary"
                   >
                     Edit course
                   </Link>

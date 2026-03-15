@@ -17,12 +17,50 @@ import InstructorCourseLearners from './pages/InstructorCourseLearners'
 import AppShell from './components/AppShell'
 import InstructorProtectedRoute from './components/InstructorProtectedRoute'
 import ProtectedRoute from './components/ProtectedRoute'
+import PublicOnlyRoute from './components/PublicOnlyRoute'
 
 function App() {
   return (
     <AppShell>
       <Routes>
+        {/* Public — marketing home (shows dashboard when logged in as learner) */}
         <Route path="/" element={<Home />} />
+
+        {/* Public-only — redirect authenticated users to their dashboard */}
+        <Route
+          path="/signup"
+          element={
+            <PublicOnlyRoute>
+              <Signup />
+            </PublicOnlyRoute>
+          }
+        />
+        <Route
+          path="/signup/learner"
+          element={
+            <PublicOnlyRoute>
+              <LearnerSignup />
+            </PublicOnlyRoute>
+          }
+        />
+        <Route
+          path="/signup/instructor"
+          element={
+            <PublicOnlyRoute>
+              <InstructorSignup />
+            </PublicOnlyRoute>
+          }
+        />
+        <Route
+          path="/signin"
+          element={
+            <PublicOnlyRoute>
+              <Signin />
+            </PublicOnlyRoute>
+          }
+        />
+
+        {/* Learner-protected routes */}
         <Route
           path="/courses"
           element={
@@ -47,16 +85,40 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route path="/community" element={<Community />} />
-        <Route path="/channels" element={<Channels />} />
-        <Route path="/announcements" element={<Announcements />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/signup/learner" element={<LearnerSignup />} />
-        <Route path="/signup/instructor" element={<InstructorSignup />} />
-        <Route path="/signin" element={<Signin />} />
+        <Route
+          path="/community"
+          element={
+            <ProtectedRoute>
+              <Community />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/channels"
+          element={
+            <ProtectedRoute>
+              <Channels />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/announcements"
+          element={
+            <ProtectedRoute>
+              <Announcements />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Convenience redirects */}
+        <Route path="/explore" element={<Navigate to="/courses" replace />} />
+
+        {/* Instructor route aliases */}
         <Route path="/instructor" element={<Navigate to="/instructor/courses" replace />} />
         <Route path="/instructor/signup" element={<Navigate to="/signup/instructor" replace />} />
         <Route path="/instructor/signin" element={<Navigate to="/signin" replace />} />
+
+        {/* Instructor-protected routes */}
         <Route
           path="/instructor/courses"
           element={
