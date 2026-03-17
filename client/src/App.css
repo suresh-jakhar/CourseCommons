@@ -1,3 +1,27 @@
+/* Sparkle Animation */
+.sparkles-container {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+
+.sparkle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, #eaf6ff 60%, #b6d0ff 100%);
+  box-shadow: 0 0 8px 2px #b6d0ff66, 0 0 16px 4px #b6e0ff33;
+  opacity: 0.7;
+  animation: sparkle-twinkle 2.2s infinite ease-in-out;
+  pointer-events: none;
+  transition: opacity 0.3s, box-shadow 0.3s;
+}
+
+@keyframes sparkle-twinkle {
+  0%, 100% { opacity: 0.85; transform: scale(1); }
+  50% { opacity: 0.2; transform: scale(1.5); }
+}
 .counter {
   font-size: 16px;
   padding: 5px 10px;
