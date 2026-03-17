@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { AnnouncementCard, CourseCard, SectionHeader, UpdateCard } from '../components/SurfaceCards'
 import GuestNav from '../components/navigation/GuestNav'
 import logo from '../assets/CC-logo-svg.svg'
+import Sparkles from '../components/Sparkles'
 
 export default function LandingPage() {
   return (
@@ -11,6 +12,8 @@ export default function LandingPage() {
         className="relative min-h-screen overflow-hidden"
         style={{ background: '#04070d' }}
       >
+        {/* Sparkles overlay */}
+        <Sparkles />
         {/* Dense starfield */}
         <div
           className="pointer-events-none absolute inset-0"
@@ -79,10 +82,7 @@ export default function LandingPage() {
         {/* Guest Navigation */}
         <GuestNav />
 
-        {false && (
-          <>
-
-        {/* Hero content */}
+        {/* Hero content restored */}
         <div className="landing-hero-copy relative z-10 mx-auto max-w-4xl px-6 pb-10 pt-28 text-center md:pt-32">
           <h1 className="landing-hero-title cinematic-title text-[2.9rem] font-black leading-[1.05] tracking-tight text-primary md:text-[4.1rem]">
             Where Knowledge
@@ -242,8 +242,6 @@ export default function LandingPage() {
             </div>
           </div>
         </div>
-          </>
-        )}
       </section>
 
       {false && (

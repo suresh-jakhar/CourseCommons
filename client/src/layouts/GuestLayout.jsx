@@ -1,4 +1,5 @@
 import GuestNav from '../components/navigation/GuestNav'
+import { Outlet } from 'react-router-dom'
 
 export default function GuestLayout() {
   return (
@@ -11,6 +12,7 @@ export default function GuestLayout() {
         <div className="landing-lamp-haze" />
         <div className="landing-lamp-floor" />
       </div>
+      <Outlet />
     </div>
   )
 }
